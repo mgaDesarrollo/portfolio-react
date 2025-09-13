@@ -15,77 +15,43 @@ export function ProjectsSection() {
   const [isAdminMode, setIsAdminMode] = useState(false)
 
   useEffect(() => {
-    const savedProjects = localStorage.getItem("mario-projects")
-    if (savedProjects) {
-      setProjects(JSON.parse(savedProjects))
-    } else {
-      // Default projects if none saved
-      const defaultProjects: Project[] = [
-        {
-          id: "1",
-          title: "E-Commerce Platform",
-          description:
-            "Plataforma de comercio electrónico completa con carrito de compras, pagos integrados y panel de administración.",
-          image: "/modern-ecommerce-interface.png",
-          technologies: ["Next.js", "React", "PostgreSQL", "Stripe", "Tailwind CSS"],
-          liveUrl: "#",
-          githubUrl: "#",
-        },
-        {
-          id: "2",
-          title: "Task Management App",
-          description:
-            "Aplicación de gestión de tareas con colaboración en tiempo real, notificaciones y análisis de productividad.",
-          image: "/task-management-dashboard.png",
-          technologies: ["React", "Node.js", "PostgreSQL", "Socket.io", "TypeScript"],
-          liveUrl: "#",
-          githubUrl: "#",
-        },
-        {
-          id: "3",
-          title: "Social Media Dashboard",
-          description:
-            "Dashboard para gestión de redes sociales con análisis de métricas, programación de posts y reportes.",
-          image: "/social-media-analytics-dashboard.png",
-          technologies: ["Next.js", "React", "PostgreSQL", "Chart.js", "Prisma"],
-          liveUrl: "#",
-          githubUrl: "#",
-        },
-        {
-          id: "4",
-          title: "Learning Management System",
-          description:
-            "Sistema de gestión de aprendizaje con cursos, evaluaciones, progreso de estudiantes y certificaciones.",
-          image: "/online-learning-platform.png",
-          technologies: ["React", "Next.js", "PostgreSQL", "AWS S3", "Tailwind CSS"],
-          liveUrl: "#",
-          githubUrl: "#",
-        },
-      ]
-      setProjects(defaultProjects)
-      localStorage.setItem("mario-projects", JSON.stringify(defaultProjects))
-    }
+    // Obtener proyectos desde la API
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => setProjects(data))
+      .catch(() => setProjects([]))
   }, [])
 
-  useEffect(() => {
-    if (projects.length > 0) {
-      localStorage.setItem("mario-projects", JSON.stringify(projects))
-    }
-  }, [projects])
+  // Eliminar lógica de localStorage
 
   const handleSaveProject = (projectData: Omit<Project, "id">) => {
     if (editingProject) {
-      // Update existing project
-      setProjects((prev) =>
-        prev.map((p) => (p.id === editingProject.id ? { ...projectData, id: editingProject.id } : p)),
-      )
+      // Actualizar proyecto en la base de datos
+      fetch("/api/projects", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...projectData, id: editingProject.id }),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          fetch("/api/projects")
+            .then((res) => res.json())
+            .then((data) => setProjects(data))
+        })
     } else {
-      // Add new project
-      const newProject: Project = {
-        ...projectData,
-        id: Date.now().toString(),
-      }
-      setProjects((prev) => [...prev, newProject])
+      // Crear nuevo proyecto en la base de datos (sin id)
+      const { id, ...dataToSend } = projectData as any
+      fetch("/api/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSend),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          fetch("/api/projects")
+            .then((res) => res.json())
+            .then((data) => setProjects(data))
+        })
     }
     setEditingProject(undefined)
   }
@@ -97,7 +63,15 @@ export function ProjectsSection() {
 
   const handleDeleteProject = (projectId: string) => {
     if (confirm("¿Estás seguro de que quieres eliminar este proyecto?")) {
-      setProjects((prev) => prev.filter((p) => p.id !== projectId))
+      fetch("/api/projects", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: Number(projectId) }),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          setProjects((prev) => prev.filter((p) => String(p.id) !== String(projectId)))
+        })
     }
   }
 
@@ -166,7 +140,13 @@ export function ProjectsSection() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
+                  {(
+                    typeof project.technologies === "string"
+                      ? (project.technologies as string).split(",")
+                      : Array.isArray(project.technologies)
+                        ? (project.technologies as string[])
+                        : []
+                  ).map((tech: string, techIndex: number) => (
                     <Badge key={techIndex} variant="secondary" className="text-xs">
                       {tech}
                     </Badge>

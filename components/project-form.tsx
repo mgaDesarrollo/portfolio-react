@@ -36,15 +36,27 @@ export function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
     technologies: project?.technologies || [],
   })
   const [imagePreview, setImagePreview] = useState<string>(formData.image || "")
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
+      // Previsualización local
       const reader = new FileReader()
       reader.onloadend = () => {
         setImagePreview(reader.result as string)
-        setFormData((prev) => ({ ...prev, image: reader.result as string }))
       }
       reader.readAsDataURL(file)
+
+      // Subida al backend
+      const form = new FormData()
+      form.append("file", file)
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: form,
+      })
+      const data = await res.json()
+      if (data.url) {
+        setFormData((prev) => ({ ...prev, image: data.url }))
+      }
     }
   }
   const [newTech, setNewTech] = useState("")
