@@ -46,8 +46,7 @@ export function HeroSection() {
             Especializado en crear aplicaciones web modernas con{" "}
             <span className="text-primary font-semibold">React</span>,{" "}
             <span className="text-primary font-semibold">Next.js</span> y{" "}
-            <span className="text-primary font-semibold">PostgreSQL</span>. Transformo ideas en experiencias digitales
-            excepcionales.
+            <span className="text-primary font-semibold">PostgreSQL</span>. Transformo ideas en experiencias digitales excepcionales y siempre estoy dispuesto a aprender nuevas tecnologías y afrontar nuevos retos.
           </p>
         </div>
 

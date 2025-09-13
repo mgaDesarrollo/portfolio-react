@@ -35,6 +35,18 @@ export function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
     githubUrl: project?.githubUrl || "",
     technologies: project?.technologies || [],
   })
+  const [imagePreview, setImagePreview] = useState<string>(formData.image || "")
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string)
+        setFormData((prev) => ({ ...prev, image: reader.result as string }))
+      }
+      reader.readAsDataURL(file)
+    }
+  }
   const [newTech, setNewTech] = useState("")
 
   const handleAddTechnology = () => {
@@ -87,13 +99,18 @@ export function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="image">URL de la Imagen</Label>
+        <Label htmlFor="image">Imagen del Proyecto</Label>
         <Input
           id="image"
-          value={formData.image}
-          onChange={(e) => setFormData((prev) => ({ ...prev, image: e.target.value }))}
-          placeholder="https://ejemplo.com/imagen.jpg"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
         />
+        {imagePreview && (
+          <div className="mt-2">
+            <img src={imagePreview} alt="Previsualización" className="max-h-40 rounded border" />
+          </div>
+        )}
       </div>
 
       <div className="space-y-2">
