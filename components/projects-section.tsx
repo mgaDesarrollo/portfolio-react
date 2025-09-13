@@ -1,0 +1,207 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { ExternalLink, Github, Plus, Edit, Trash2 } from "lucide-react"
+import { ProjectModal } from "./project-modal"
+import type { Project } from "./project-form"
+
+export function ProjectsSection() {
+  const [projects, setProjects] = useState<Project[]>([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editingProject, setEditingProject] = useState<Project | undefined>()
+  const [isAdminMode, setIsAdminMode] = useState(false)
+
+  useEffect(() => {
+    const savedProjects = localStorage.getItem("mario-projects")
+    if (savedProjects) {
+      setProjects(JSON.parse(savedProjects))
+    } else {
+      // Default projects if none saved
+      const defaultProjects: Project[] = [
+        {
+          id: "1",
+          title: "E-Commerce Platform",
+          description:
+            "Plataforma de comercio electrónico completa con carrito de compras, pagos integrados y panel de administración.",
+          image: "/modern-ecommerce-interface.png",
+          technologies: ["Next.js", "React", "PostgreSQL", "Stripe", "Tailwind CSS"],
+          liveUrl: "#",
+          githubUrl: "#",
+        },
+        {
+          id: "2",
+          title: "Task Management App",
+          description:
+            "Aplicación de gestión de tareas con colaboración en tiempo real, notificaciones y análisis de productividad.",
+          image: "/task-management-dashboard.png",
+          technologies: ["React", "Node.js", "PostgreSQL", "Socket.io", "TypeScript"],
+          liveUrl: "#",
+          githubUrl: "#",
+        },
+        {
+          id: "3",
+          title: "Social Media Dashboard",
+          description:
+            "Dashboard para gestión de redes sociales con análisis de métricas, programación de posts y reportes.",
+          image: "/social-media-analytics-dashboard.png",
+          technologies: ["Next.js", "React", "PostgreSQL", "Chart.js", "Prisma"],
+          liveUrl: "#",
+          githubUrl: "#",
+        },
+        {
+          id: "4",
+          title: "Learning Management System",
+          description:
+            "Sistema de gestión de aprendizaje con cursos, evaluaciones, progreso de estudiantes y certificaciones.",
+          image: "/online-learning-platform.png",
+          technologies: ["React", "Next.js", "PostgreSQL", "AWS S3", "Tailwind CSS"],
+          liveUrl: "#",
+          githubUrl: "#",
+        },
+      ]
+      setProjects(defaultProjects)
+      localStorage.setItem("mario-projects", JSON.stringify(defaultProjects))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (projects.length > 0) {
+      localStorage.setItem("mario-projects", JSON.stringify(projects))
+    }
+  }, [projects])
+
+  const handleSaveProject = (projectData: Omit<Project, "id">) => {
+    if (editingProject) {
+      // Update existing project
+      setProjects((prev) =>
+        prev.map((p) => (p.id === editingProject.id ? { ...projectData, id: editingProject.id } : p)),
+      )
+    } else {
+      // Add new project
+      const newProject: Project = {
+        ...projectData,
+        id: Date.now().toString(),
+      }
+      setProjects((prev) => [...prev, newProject])
+    }
+    setEditingProject(undefined)
+  }
+
+  const handleEditProject = (project: Project) => {
+    setEditingProject(project)
+    setIsModalOpen(true)
+  }
+
+  const handleDeleteProject = (projectId: string) => {
+    if (confirm("¿Estás seguro de que quieres eliminar este proyecto?")) {
+      setProjects((prev) => prev.filter((p) => p.id !== projectId))
+    }
+  }
+
+  const handleNewProject = () => {
+    setEditingProject(undefined)
+    setIsModalOpen(true)
+  }
+
+  return (
+    <section id="proyectos" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-balance">Mis Proyectos</h2>
+            <Button variant="outline" size="sm" onClick={() => setIsAdminMode(!isAdminMode)} className="text-xs">
+              {isAdminMode ? "Modo Vista" : "Modo Admin"}
+            </Button>
+          </div>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
+            Una selección de mis trabajos más recientes, donde combino diseño moderno con funcionalidad robusta para
+            crear experiencias web excepcionales.
+          </p>
+
+          {isAdminMode && (
+            <Button onClick={handleNewProject} className="mt-6">
+              <Plus className="mr-2 h-4 w-4" />
+              Nuevo Proyecto
+            </Button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {projects.map((project) => (
+            <Card key={project.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 relative">
+              {isAdminMode && (
+                <div className="absolute top-2 right-2 z-10 flex gap-2">
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => handleEditProject(project)}
+                    className="h-8 w-8 p-0"
+                  >
+                    <Edit className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => handleDeleteProject(project.id)}
+                    className="h-8 w-8 p-0"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+
+              <div className="aspect-video overflow-hidden">
+                <img
+                  src={project.image || "/placeholder.svg?height=300&width=500&query=project screenshot"}
+                  alt={project.title}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-xl">{project.title}</CardTitle>
+                <CardDescription className="text-pretty">{project.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech, techIndex) => (
+                    <Badge key={techIndex} variant="secondary" className="text-xs">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex gap-3">
+                  {project.liveUrl && project.liveUrl !== "#" && (
+                    <Button size="sm" className="flex-1" asChild>
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Ver Proyecto
+                      </a>
+                    </Button>
+                  )}
+                  {project.githubUrl && project.githubUrl !== "#" && (
+                    <Button variant="outline" size="sm" className="flex-1 bg-transparent" asChild>
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <Github className="mr-2 h-4 w-4" />
+                        Código
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        project={editingProject}
+        onSave={handleSaveProject}
+      />
+    </section>
+  )
+}
