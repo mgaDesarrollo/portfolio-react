@@ -1,12 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Download } from "lucide-react"
+import { Github, Linkedin, Mail, Download, Globe, Phone } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export function HeroSection() {
   const [displayedText, setDisplayedText] = useState("")
-  const fullText = "Mario Gabriel Avendano"
+  const fullText = "Mario Gabriel Avendaño"
 
   useEffect(() => {
     let currentIndex = 0
@@ -50,29 +50,16 @@ export function HeroSection() {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-          <Button size="lg" className="font-semibold">
-            <Mail className="mr-2 h-4 w-4" />
-            Contactar
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button asChild size="lg" className="font-semibold">
+            <a href="mailto:mariogabriel.dvlp@gmail.com">
+              <Mail className="mr-2 h-4 w-4" /> Contactar
+            </a>
           </Button>
-          <Button variant="outline" size="lg" className="font-semibold bg-transparent">
-            <Download className="mr-2 h-4 w-4" />
-            Descargar CV
-          </Button>
-        </div>
-
-        <div className="flex justify-center space-x-6">
-          <Button variant="ghost" size="icon" className="h-12 w-12">
-            <Github className="h-6 w-6" />
-            <span className="sr-only">GitHub</span>
-          </Button>
-          <Button variant="ghost" size="icon" className="h-12 w-12">
-            <Linkedin className="h-6 w-6" />
-            <span className="sr-only">LinkedIn</span>
-          </Button>
-          <Button variant="ghost" size="icon" className="h-12 w-12">
-            <Mail className="h-6 w-6" />
-            <span className="sr-only">Email</span>
+          <Button variant="outline" size="lg" className="font-semibold bg-transparent" asChild>
+            <a href="/curriculum" target="_blank" rel="noopener noreferrer">
+              <Download className="mr-2 h-4 w-4" /> Ver CV
+            </a>
           </Button>
         </div>
       </div>

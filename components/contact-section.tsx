@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, MapPin, Phone, Send } from "lucide-react"
+import { Mail, MapPin, Phone, Send, Github, Linkedin, Globe } from "lucide-react"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -55,15 +55,27 @@ export function ContactSection() {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary" />
-                <span>mario.avendano@email.com</span>
+                <a href="mailto:mariogabriel.dvlp@gmail.com" className="hover:underline">mariogabriel.dvlp@gmail.com</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary" />
-                <span>+54 9 11 1234-5678</span>
+                <a href="tel:+543516503188" className="hover:underline">+54 351 650 3188</a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Github className="h-5 w-5 text-primary" />
+                <a href="https://github.com/mgaDesarrollo" target="_blank" rel="noopener noreferrer" className="hover:underline">github.com/mgaDesarrollo</a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Linkedin className="h-5 w-5 text-primary" />
+                <a href="https://www.linkedin.com/in/gabriel-avendaño-4334a02a5" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn / Perfil</a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Globe className="h-5 w-5 text-primary" />
+                <a href="https://portfolio-react-3pol.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:underline">Portfolio</a>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-primary" />
-                <span>Buenos Aires, Argentina</span>
+                <span>Córdoba, Argentina</span>
               </div>
             </div>
           </div>

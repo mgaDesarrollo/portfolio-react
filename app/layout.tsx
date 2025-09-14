@@ -8,8 +8,8 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Mario Gabriel Avendano - Desarrollador Full Stack",
-  description: "Portfolio de Mario Gabriel Avendano - Especialista en React, Next.js y PostgreSQL",
+  title: "Mario Gabriel Avendaño - Desarrollador Full Stack",
+  description: "Portfolio de Mario Gabriel Avendaño - Especialista en React, Next.js y PostgreSQL",
   generator: "v0.app",
 }
 
