@@ -1,15 +1,49 @@
 "use client"
 
-import { Download, Mail, Phone, MapPin, Github, Globe, Linkedin, Link } from "lucide-react"
+import { Download, Mail, Phone, MapPin, Github, Globe, Linkedin, Link, ArrowLeft } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 
 export default function Curriculum() {
+  const router = useRouter()
+
+  // Forzar tema claro al imprimir (si está en modo oscuro lo quita temporalmente)
+  useEffect(() => {
+    const root = document.documentElement
+    const before = () => {
+      if (root.classList.contains('dark')) {
+        root.dataset._wasDark = '1'
+        root.classList.remove('dark')
+      }
+    }
+    const after = () => {
+      if (root.dataset._wasDark === '1') {
+        root.classList.add('dark')
+        delete root.dataset._wasDark
+      }
+    }
+    window.addEventListener('beforeprint', before)
+    window.addEventListener('afterprint', after)
+    return () => {
+      window.removeEventListener('beforeprint', before)
+      window.removeEventListener('afterprint', after)
+    }
+  }, [])
+
   const handlePrint = () => {
-    window.print()
+    const root = document.documentElement
+    const wasDark = root.classList.contains('dark')
+    if (wasDark) root.classList.remove('dark')
+    setTimeout(() => {
+      window.print()
+      if (wasDark) root.classList.add('dark')
+    }, 30)
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black p-8">
+    <div className="min-h-screen bg-white dark:bg-black p-8 cv-root">
       <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-none rounded-none overflow-visible">
         {/* Header */}
         <div className="bg-white dark:bg-black text-black dark:text-white p-8">
@@ -40,10 +74,15 @@ export default function Curriculum() {
                 </div>
               </div>
             </div>
-            <Button onClick={handlePrint} variant="secondary" size="sm" className="print:hidden">
-              <Download className="w-4 h-4 mr-2" />
-              Descargar PDF
-            </Button>
+            <div className="flex items-center gap-2 self-start print:hidden">
+              <Button onClick={() => router.back()} variant="outline" size="sm">
+                <ArrowLeft className="w-4 h-4 mr-1" /> Volver
+              </Button>
+              <Button onClick={handlePrint} variant="secondary" size="sm">
+                <Download className="w-4 h-4 mr-2" /> PDF
+              </Button>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
         {/* Perfil Profesional */}
@@ -101,7 +140,7 @@ export default function Curriculum() {
             <div className="border-l-4 pl-6">
               <div className="flex justify-between items-start mb-2">
                 <h4 className="text-lg font-semibold dark:text-white">Técnico Superior en Programación | UTN</h4>
-                <span className="text-sm">(falta solo tesis)</span>
+                <span className="text-sm">2015 · (falta solo tesis)</span>
               </div>
               <p className="font-medium">Programación informática, enfoque en desarrollo de software y soluciones técnicas.</p>
             </div>
@@ -159,41 +198,47 @@ export default function Curriculum() {
             </div>
           </div>
         </section>
-        {/* Idiomas */}
-        <section className="p-8">
-          <h3 className="text-2xl font-mono font-bold mb-4 border-b-2 pb-2 dark:text-white">Idiomas</h3>
-          <div className="flex flex-row gap-4 justify-center">
-            <div className="text-center p-4 border rounded-lg w-40">
-              <h4 className="font-semibold dark:text-white">Español</h4>
-              <p>Nativo</p>
-            </div>
-            <div className="text-center p-4 border rounded-lg w-40">
-              <h4 className="font-semibold dark:text-white">Inglés</h4>
-              <p>Básico</p>
-            </div>
+        {/* Idiomas (compacto) */}
+        <section className="px-8 pb-4 pt-0 print:pt-0">
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            <h3 className="text-base font-mono font-semibold m-0 dark:text-white border-none p-0">Idiomas:</h3>
+            <span className="dark:text-white">Español (Nativo)</span>
+            <span className="opacity-60">|</span>
+            <span className="dark:text-white">Inglés (Básico)</span>
           </div>
         </section>
       </div>
       <style jsx global>{`
         @media print {
-          html, body, #__next, .min-h-screen, .max-w-4xl, .p-8, .rounded-lg, .rounded-none, .overflow-visible {
+          @page { size: A4 portrait; margin: 10mm; }
+          html, body, #__next, .cv-root {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
             background: #fff !important;
           }
-          .print\\:hidden {
-            display: none !important;
-          }
-          h1, h2, h3, h4, h5, h6, p, span, li, td, th, a, .font-bold, .font-semibold, .font-medium, .text-primary, .text-primary-foreground, .text-muted-foreground, .text-black, .text-white {
-            color: #000 !important;
-            opacity: 1 !important;
-            -webkit-text-fill-color: #000 !important;
-          }
-          * {
-            box-shadow: none !important;
-            text-shadow: none !important;
-            opacity: 1 !important;
-          }
+          /* Neutralizar posibles fondos oscuros heredados */
+          .dark & { background: #fff !important; }
+          .dark .cv-root { background: #fff !important; }
+          .dark .cv-root * { background-color: transparent !important; }
+          body, .cv-root { font-size: 11px !important; line-height: 1.25; }
+          .cv-root .p-8 { padding: 18px !important; }
+          section.p-8 { padding: 14px 18px !important; }
+          .cv-root h1 { font-size: 22pt !important; margin-bottom: 4px !important; }
+          .cv-root h2 { font-size: 12pt !important; margin-bottom: 6px !important; }
+            .cv-root h3 { font-size: 11pt !important; margin-bottom: 6px !important; }
+          .cv-root h4 { font-size: 10pt !important; margin-bottom: 2px !important; }
+          .cv-root p, .cv-root li, .cv-root span { font-size: 10pt !important; }
+          .cv-root ul { margin: 2px 0 6px 0 !important; }
+          .cv-root .mb-6 { margin-bottom: 10px !important; }
+          .cv-root .mt-2 { margin-top: 4px !important; }
+          .cv-root .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 10px !important; }
+          /* Badges más compactas */
+          .cv-root span.rounded-full { padding: 2px 6px !important; font-size: 9pt !important; }
+          /* Ocultar controles no necesarios */
+          .print\\:hidden, .cv-root button, .cv-root [role="button"] { display: none !important; }
+          /* Forzar texto negro */
+          h1, h2, h3, h4, h5, h6, p, span, li, td, th, a { color: #000 !important; -webkit-text-fill-color: #000 !important; }
+          * { box-shadow: none !important; text-shadow: none !important; }
         }
       `}</style>
     </div>
