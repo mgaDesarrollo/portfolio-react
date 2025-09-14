@@ -34,7 +34,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 gap-8">
+      <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-center bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-400 to-primary">The world is yours</h1>
       <Card className="w-full max-w-sm">
         <CardHeader className="items-center space-y-2">
           <Code2 className="h-10 w-10 text-primary" />
