@@ -14,11 +14,6 @@ export function AboutSection() {
       description: "Node.js, PostgreSQL, API REST, Prisma",
     },
     {
-      icon: Globe,
-      title: "Full Stack",
-      description: "Aplicaciones completas de extremo a extremo",
-    },
-    {
       icon: Zap,
       title: "Performance",
       description: "Optimización y mejores prácticas",
@@ -36,9 +31,9 @@ export function AboutSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-5xl mx-auto justify-items-center">
           {skills.map((skill, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
+            <Card key={index} className="w-full text-center hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6">
                 <skill.icon className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="font-semibold text-lg mb-2">{skill.title}</h3>

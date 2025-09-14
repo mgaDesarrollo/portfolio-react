@@ -36,6 +36,7 @@ export function ProjectsSection() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingProject, setEditingProject] = useState<Project | undefined>()
   const [isAdminMode, setIsAdminMode] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
     // Obtener proyectos desde la API
@@ -43,6 +44,14 @@ export function ProjectsSection() {
       .then((res) => res.json())
       .then((data) => setProjects(data))
       .catch(() => setProjects([]))
+
+    // Verificar autenticación
+    fetch("/api/auth/me")
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((data) => {
+        if (data.authenticated) setIsAuthenticated(true)
+      })
+      .catch(() => setIsAuthenticated(false))
   }, [])
 
   // Eliminar lógica de localStorage
@@ -109,16 +118,18 @@ export function ProjectsSection() {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-4 mb-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground text-balance">Mis Proyectos</h2>
-            <Button variant="outline" size="sm" onClick={() => setIsAdminMode(!isAdminMode)} className="text-xs">
-              {isAdminMode ? "Modo Vista" : "Modo Admin"}
-            </Button>
+            {isAuthenticated && (
+              <Button variant="outline" size="sm" onClick={() => setIsAdminMode(!isAdminMode)} className="text-xs">
+                {isAdminMode ? "Modo Vista" : "Modo Admin"}
+              </Button>
+            )}
           </div>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
             Una selección de mis trabajos más recientes, donde combino diseño moderno con funcionalidad robusta para
             crear experiencias web excepcionales.
           </p>
 
-          {isAdminMode && (
+          {isAuthenticated && isAdminMode && (
             <Button onClick={handleNewProject} className="mt-6">
               <Plus className="mr-2 h-4 w-4" />
               Nuevo Proyecto
@@ -126,13 +137,13 @@ export function ProjectsSection() {
           )}
         </div>
 
-  <div className="relative max-w-4xl mx-auto">
+  <div className="relative max-w-6xl mx-auto">
           <Carousel opts={{ align: 'start' }}>
             <CarouselContent>
               {projects.map((project) => (
-                <CarouselItem key={project.id} className="basis-full lg:basis-1/2">
+                <CarouselItem key={project.id} className="basis-full md:basis-1/2 xl:basis-1/3">
                   <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 relative w-full h-[500px] flex flex-col">
-                    {isAdminMode && (
+                    {isAuthenticated && isAdminMode && (
                       <div className="absolute top-2 right-2 z-10 flex gap-2">
                         <Button
                           size="sm"

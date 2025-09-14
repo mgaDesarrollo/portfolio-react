@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X, Code2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -8,6 +8,19 @@ import { ThemeToggle } from "@/components/theme-toggle"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [authenticated, setAuthenticated] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/auth/me')
+      .then(res => res.ok ? res.json() : Promise.reject())
+      .then(data => { if (data.authenticated) setAuthenticated(true) })
+      .catch(() => setAuthenticated(false))
+  }, [])
+
+  const handleLogout = async () => {
+    await fetch('/api/logout', { method: 'POST' })
+    setAuthenticated(false)
+  }
 
   const navItems = [
     { href: "#inicio", label: "Inicio" },
@@ -38,6 +51,15 @@ export function Navigation() {
               </Link>
             ))}
             <ThemeToggle />
+            {authenticated ? (
+              <Button variant="outline" size="sm" onClick={handleLogout} className="bg-transparent">
+                Logout
+              </Button>
+            ) : (
+              <Button variant="outline" size="sm" asChild className="bg-transparent">
+                <Link href="/login">Login</Link>
+              </Button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -63,6 +85,17 @@ export function Navigation() {
                   {item.label}
                 </Link>
               ))}
+              <div className="flex items-center gap-3 px-3 pt-2">
+                {authenticated ? (
+                  <Button size="sm" variant="outline" className="flex-1 bg-transparent" onClick={() => { handleLogout(); setIsOpen(false) }}>
+                    Logout
+                  </Button>
+                ) : (
+                  <Button size="sm" variant="outline" asChild className="flex-1 bg-transparent" onClick={() => setIsOpen(false)}>
+                    <Link href="/login">Login</Link>
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         )}

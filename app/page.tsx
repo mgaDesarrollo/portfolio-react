@@ -14,11 +14,7 @@ export default function Home() {
         <AboutSection />
         <ProjectsSection />
         <ContactSection />
-        <div className="flex justify-center my-8">
-          <a href="/curriculum" className="bg-primary text-primary-foreground px-6 py-2 rounded shadow hover:bg-primary/80 transition font-bold">
-            Ver Curriculum
-          </a>
-        </div>
+        
       </main>
       <Footer />
     </div>

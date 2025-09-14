@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Download, Globe, Phone } from "lucide-react"
+import { Github, Linkedin, Mail, Download, Globe, Phone, Code2 } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export function HeroSection() {
@@ -37,11 +37,15 @@ export function HeroSection() {
     >
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div className="mb-8">
+          {/* Logo above main title */}
+          <div className="flex flex-col items-center justify-center mb-8">
+            <Code2 className="h-16 w-16 sm:h-20 sm:w-20 text-primary drop-shadow" aria-hidden="true" />
+          </div>
           <h1 className="text-4xl sm:text-6xl font-bold text-foreground mb-4 text-balance font-mono min-h-[1.2em]">
             <span className="text-primary">{displayedText}</span>
             <span className="animate-pulse">|</span>
           </h1>
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-6 text-balance">Desarrollador Full Stack</p>
+          <p className="text-xl sm:text-2xl text-muted-foreground mb-6 text-balance">Desarrollador Front-end</p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 text-pretty">
             Especializado en crear aplicaciones web modernas con{" "}
             <span className="text-primary font-semibold">React</span>,{" "}
