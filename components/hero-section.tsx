@@ -42,7 +42,7 @@ export function HeroSection() {
   return (
     <section
       id="inicio"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden pt-28 md:pt-0 scroll-mt-24"
     >
       {/* Pattern grid background responsive to theme */}
       <div
@@ -79,7 +79,7 @@ export function HeroSection() {
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-400/40 via-emerald-300/15 to-emerald-500/40 blur-2xl opacity-60 group-hover:opacity-80 transition-opacity"
               />
-              <div className="relative h-[10.5rem] w-[10.5rem] sm:h-48 sm:w-48 rounded-full overflow-hidden border border-emerald-400/40 shadow-lg shadow-emerald-500/10">
+              <div className="relative h-40 w-40 sm:h-48 sm:w-48 rounded-full overflow-hidden border border-emerald-400/40 shadow-lg shadow-emerald-500/10 transition-all duration-300">
                 {!imageLoaded && !imageError && (
                   <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-emerald-500/10 to-emerald-700/10" />
                 )}
