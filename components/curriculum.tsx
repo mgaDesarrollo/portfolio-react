@@ -1,10 +1,11 @@
 "use client"
 
-import { Download, Mail, Phone, MapPin, Github, Globe, Linkedin, Link, ArrowLeft } from "lucide-react"
+import { Download, Mail, Phone, Github, Globe, Linkedin, ArrowLeft } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export default function Curriculum() {
   const router = useRouter()
@@ -42,38 +43,72 @@ export default function Curriculum() {
     }, 30)
   }
 
+  const [cvImageSrc, setCvImageSrc] = useState("/profile.jpg")
+  const [imgError, setImgError] = useState(false)
+
   return (
     <div className="min-h-screen bg-white dark:bg-black p-8 cv-root">
       <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-none rounded-none overflow-visible">
         {/* Header */}
         <div className="bg-white dark:bg-black text-black dark:text-white p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-start">
-            <div>
-              <h1 className="text-4xl font-mono font-bold mb-2 dark:text-white">Mario Gabriel Avendaño</h1>
-              <h2 className="text-xl font-light opacity-90 dark:text-white">Desarrollador Front-end</h2>
-              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-primary" />
-                  <a href="mailto:mariogabriel.dvlp@gmail.com" className="hover:underline">mariogabriel.dvlp@gmail.com</a>
+          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
+            {/* Bloque Izquierdo con Avatar + Datos */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+              <div className="relative mx-auto sm:mx-0 print:h-28 print:w-28">
+                <div className="relative h-32 w-32 print:h-28 print:w-28 rounded-full overflow-hidden border border-emerald-500/40 shadow shadow-emerald-500/10 print:border-gray-400 print:shadow-none">
+                  {!imgError && (
+                    <Image
+                      src={cvImageSrc}
+                      alt="Foto de perfil de Mario Gabriel Avendaño"
+                      fill
+                      sizes="128px"
+                      className="object-cover"
+                      priority
+                      onError={() => {
+                        if (!imgError) {
+                          setImgError(true)
+                          setCvImageSrc('/profile.jpg.jpg')
+                        }
+                      }}
+                    />
+                  )}
+                  {imgError && (
+                    <div className="w-full h-full flex items-center justify-center bg-emerald-600/20 text-emerald-800 font-semibold text-xl">
+                      MG
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-primary" />
-                  <a href="tel:+543516503188" className="hover:underline">+54 351 650 3188</a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Github className="h-4 w-4 text-primary" />
-                  <a href="https://github.com/mgaDesarrollo" target="_blank" rel="noopener noreferrer" className="hover:underline">github.com/mgaDesarrollo</a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Linkedin className="h-4 w-4 text-primary" />
-                  <a href="https://www.linkedin.com/in/gabriel-avendaño-4334a02a5" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn / Perfil</a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 text-primary" />
-                  <a href="https://portfolio-react-3pol.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:underline">Portfolio Web</a>
+                {/* Glow suave sólo en pantalla, no en print */}
+                <span aria-hidden className="hidden print:hidden sm:block absolute -inset-1 rounded-full bg-emerald-400/20 blur-xl" />
+              </div>
+              <div>
+                <h1 className="text-4xl font-mono font-bold mb-2 dark:text-white print:mb-1">Mario Gabriel Avendaño</h1>
+                <h2 className="text-xl font-light opacity-90 dark:text-white print:text-base print:opacity-100">Desarrollador Front-end</h2>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm print:mt-2">
+                  <div className="flex items-center gap-2">
+                    <Mail className="h-4 w-4 text-primary print:text-black" />
+                    <a href="mailto:mariogabriel.dvlp@gmail.com" className="hover:underline">mariogabriel.dvlp@gmail.com</a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-4 w-4 text-primary print:text-black" />
+                    <a href="tel:+543516503188" className="hover:underline">+54 351 650 3188</a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Github className="h-4 w-4 text-primary print:text-black" />
+                    <a href="https://github.com/mgaDesarrollo" target="_blank" rel="noopener noreferrer" className="hover:underline">github.com/mgaDesarrollo</a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Linkedin className="h-4 w-4 text-primary print:text-black" />
+                    <a href="https://www.linkedin.com/in/gabriel-avendaño-4334a02a5" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn / Perfil</a>
+                  </div>
+                  <div className="flex items-center gap-2 sm:col-span-2">
+                    <Globe className="h-4 w-4 text-primary print:text-black" />
+                    <a href="https://portfolio-react-3pol.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:underline">Portfolio Web</a>
+                  </div>
                 </div>
               </div>
             </div>
+            {/* Controles (ocultos en impresión) */}
             <div className="flex items-center gap-2 self-start print:hidden">
               <Button onClick={() => router.back()} variant="outline" size="sm">
                 <ArrowLeft className="w-4 h-4 mr-1" /> Volver

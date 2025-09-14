@@ -1,7 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Download, Globe, Phone, Code2 } from "lucide-react"
+import { Github, Linkedin, Mail, Download, Globe, Phone } from "lucide-react"
+// Eliminado uso de Avatar primitives para poder usar next/image con blur y evitar error de contexto
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 export function HeroSection() {
@@ -24,6 +26,10 @@ export function HeroSection() {
 
   // Parallax state
   const [offset, setOffset] = useState(0)
+  const [imageError, setImageError] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  // Fallback para nombre de archivo incorrecto (en public aparece como profile.jpg.jpg actualmente)
+  const [imageSrc, setImageSrc] = useState<string>("/profile.jpg")
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
@@ -57,9 +63,50 @@ export function HeroSection() {
       </div>
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div className="mb-8">
-          {/* Logo above main title */}
+          {/* Avatar (profile photo) with subtle glow and hover ring */}
           <div className="flex flex-col items-center justify-center mb-8">
-            <Code2 className="h-16 w-16 sm:h-20 sm:w-20 text-primary drop-shadow" aria-hidden="true" />
+            <div
+              className="relative group"
+              style={{ transform: `translate3d(0, ${offset * 0.05}px, 0)` }}
+            >
+              {/* Rotating subtle animated ring */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -inset-4 rounded-full bg-[conic-gradient(from_var(--angle),theme(colors.emerald.400/.35),theme(colors.emerald.300/.15),theme(colors.emerald.500/.35))] opacity-45 group-hover:opacity-75 blur-sm animate-[spin_16s_linear_infinite] [mask:radial-gradient(circle,transparent_60%,black_62%)]"
+              />
+              {/* Static glow */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-400/40 via-emerald-300/15 to-emerald-500/40 blur-2xl opacity-60 group-hover:opacity-80 transition-opacity"
+              />
+              <div className="relative h-[10.5rem] w-[10.5rem] sm:h-48 sm:w-48 rounded-full overflow-hidden border border-emerald-400/40 shadow-lg shadow-emerald-500/10">
+                {!imageLoaded && !imageError && (
+                  <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-emerald-500/10 to-emerald-700/10" />
+                )}
+                {imageError && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-emerald-700/30 text-primary font-semibold backdrop-blur-sm">
+                    MG
+                  </div>
+                )}
+                <Image
+                  src={imageSrc}
+                  alt="Foto de perfil de Mario Gabriel Avendaño"
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 168px, 256px"
+                  className={"object-cover transition-opacity duration-500 " + (imageLoaded ? 'opacity-100' : 'opacity-0')}
+                  placeholder="blur"
+                  onLoadingComplete={() => setImageLoaded(true)}
+                  onError={() => {
+                    if (!imageError) {
+                      setImageError(true)
+                      setImageSrc('/profile.jpg.jpg')
+                    }
+                  }}
+                  blurDataURL="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAI0lEQVQoU2P8////fwYsgAmYMWPGP4ZlYGJgIBKMKqBiGA0GAAAbPhE9FzaEvQAAAABJRU5ErkJggg=="
+                />
+              </div>
+            </div>
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold mb-4 text-balance font-mono min-h-[1.2em] relative">
             <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-500 dark:from-emerald-300 dark:via-emerald-400 dark:to-emerald-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-[gradient-move_6s_linear_infinite] drop-shadow-sm">
