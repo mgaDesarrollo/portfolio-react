@@ -119,12 +119,12 @@ export function ProjectsSection() {
           <div className="flex items-center justify-center gap-4 mb-4">
             {/* Título con efecto de iluminación */}
             <div className="relative">
-              <h2 className="relative z-10 text-3xl sm:text-4xl font-bold text-foreground text-balance">
+              <h2 className="relative z-10 text-3xl sm:text-4xl font-bold text-foreground text-balance supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.25)] dark:supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.6)]">
                 Mis Proyectos
               </h2>
               <span
                 aria-hidden
-                className="pointer-events-none absolute -inset-x-8 -inset-y-2 bg-gradient-to-r from-emerald-400/30 via-emerald-300/10 to-emerald-500/30 dark:from-emerald-400/35 dark:via-emerald-300/15 dark:to-emerald-500/35 blur-2xl opacity-30"
+                className="pointer-events-none absolute -inset-x-8 -inset-y-2 bg-gradient-to-r from-emerald-400/25 via-emerald-300/8 to-emerald-500/25 dark:from-emerald-400/30 dark:via-emerald-300/12 dark:to-emerald-500/30 blur-2xl opacity-25"
               />
             </div>
             {isAuthenticated && (
@@ -140,13 +140,13 @@ export function ProjectsSection() {
           </div>
           {/* Descripción con iluminación sutil para no competir con las tarjetas */}
           <p className="relative text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-            <span className="relative z-10">
+            <span className="relative z-10 supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.18)] dark:supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.5)]">
               Una selección de mis trabajos más recientes, donde combino diseño moderno con funcionalidad robusta para
               crear experiencias web excepcionales.
             </span>
             <span
               aria-hidden
-              className="pointer-events-none absolute -inset-x-10 -top-2 -bottom-2 bg-gradient-to-r from-emerald-400/25 via-emerald-300/8 to-emerald-500/25 dark:from-emerald-400/30 dark:via-emerald-300/10 dark:to-emerald-500/30 blur-3xl opacity-20"
+              className="pointer-events-none absolute -inset-x-10 -top-2 -bottom-2 bg-gradient-to-r from-emerald-400/20 via-emerald-300/6 to-emerald-500/20 dark:from-emerald-400/24 dark:via-emerald-300/8 dark:to-emerald-500/24 blur-3xl opacity-16"
             />
           </p>
 

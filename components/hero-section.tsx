@@ -115,17 +115,17 @@ export function HeroSection() {
             <span className="animate-pulse text-emerald-400">|</span>
           </h1>
           <p className="relative text-xl sm:text-2xl text-muted-foreground mb-6 text-balance">
-            <span className="relative z-10">Desarrollador Front-end</span>
-            <span aria-hidden className="pointer-events-none absolute inset-0 blur-xl opacity-25 bg-gradient-to-r from-emerald-400/40 via-emerald-300/20 to-emerald-500/40 animate-pulse" />
+            <span className="relative z-10 supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.25)] dark:supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.6)]">Desarrollador Front-end</span>
+            <span aria-hidden className="pointer-events-none absolute inset-0 blur-xl opacity-20 bg-gradient-to-r from-emerald-400/30 via-emerald-300/15 to-emerald-500/30 animate-pulse" />
           </p>
           <p className="relative text-lg text-muted-foreground max-w-2xl mx-auto mb-8 text-pretty">
-            <span className="relative z-10">
+            <span className="relative z-10 supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.2)] dark:supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.55)]">
             Especializado en crear aplicaciones web modernas con{" "}
             <span className="text-primary font-semibold">React</span>,{" "}
             <span className="text-primary font-semibold">Next.js</span> y{" "}
             <span className="text-primary font-semibold">PostgreSQL</span>. Transformo ideas en experiencias digitales excepcionales y siempre estoy dispuesto a aprender nuevas tecnologías y afrontar nuevos retos.
             </span>
-            <span aria-hidden className="pointer-events-none absolute -inset-x-8 -bottom-2 -top-2 blur-2xl opacity-15 bg-gradient-to-r from-emerald-400/30 via-emerald-300/10 to-emerald-500/30" />
+            <span aria-hidden className="pointer-events-none absolute -inset-x-8 -bottom-2 -top-2 blur-2xl opacity-10 bg-gradient-to-r from-emerald-400/25 via-emerald-300/8 to-emerald-500/25" />
           </p>
         </div>
 
