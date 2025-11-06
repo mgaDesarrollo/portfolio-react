@@ -53,30 +53,22 @@ export default function Curriculum() {
         <div className="bg-white dark:bg-black text-black dark:text-white p-8">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
             {/* Bloque Izquierdo con Avatar + Datos */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+            <div className="flex flex-col sm:flex-row sm:it            // ...existing code...
+                    <figure className="photo">
+                      <img 
+                        src="public\profile.jpg" 
+                        alt="Foto de perfil de Mario Gabriel Avendaño" 
+                      />
+                    </figure>
+            // ...existing code...ems-center gap-6">
               <div className="relative mx-auto sm:mx-0 print:h-28 print:w-28">
                 <div className="relative h-32 w-32 print:h-28 print:w-28 rounded-full overflow-hidden border border-emerald-500/40 shadow shadow-emerald-500/10 print:border-gray-400 print:shadow-none">
-                  {!imgError && (
-                    <Image
-                      src={cvImageSrc}
-                      alt="Foto de perfil de Mario Gabriel Avendaño"
-                      fill
-                      sizes="128px"
-                      className="object-cover"
-                      priority
-                      onError={() => {
-                        if (!imgError) {
-                          setImgError(true)
-                          setCvImageSrc('/profile.jpg.jpg')
-                        }
-                      }}
+                  <figure className="photo">
+                    <img 
+                      src="/profile.jpg" 
+                      alt="Foto de perfil de Mario Gabriel Avendaño" 
                     />
-                  )}
-                  {imgError && (
-                    <div className="w-full h-full flex items-center justify-center bg-emerald-600/20 text-emerald-800 font-semibold text-xl">
-                      MG
-                    </div>
-                  )}
+                  </figure>
                 </div>
                 {/* Glow suave sólo en pantalla, no en print */}
                 <span aria-hidden className="hidden print:hidden sm:block absolute -inset-1 rounded-full bg-emerald-400/20 blur-xl" />
@@ -147,8 +139,7 @@ export default function Curriculum() {
               <li>Desarrollo y mantengo proyectos web de forma independiente, gestionando el ciclo de vida completo de las aplicaciones.</li>
               <li>Colaboro con equipos freelance para entregar soluciones de alta calidad, con un enfoque en la experiencia de usuario y la optimización del rendimiento.</li>
               <li>Los proyectos más destacados se pueden ver en mi portafolio.</li>
-            </ul>
-          </div>
+            </div>
           <div className="mb-6">
             <h4 className="text-lg font-semibold dark:text-white">Técnico de Soporte a Usuarios | Flexxus</h4>
             <span className="text-sm opacity-80">agosto de 2020 - noviembre de 2020</span>
@@ -216,63 +207,62 @@ export default function Curriculum() {
               </div>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">Herramientas</h4>
-              <div className="flex flex-wrap gap-2">
-                {['Git', 'Vercel', 'AWS', 'VS Code'].map(skill => (
-                  <span key={skill} className="px-3 py-1 bg-gray-200 dark:bg-gray-800 rounded-full text-sm font-mono dark:text-white">{skill}</span>
-                ))}
-              </div>
-            </div>
-            <div>
+            <div> className="font-semibold mb-3">Herramientas</h4>
               <h4 className="font-semibold mb-3">Metodologías</h4>
-              <div className="flex flex-wrap gap-2">
-                {['Scrum', 'Agile', 'Git Flow'].map(skill => (
+              <div className="flex flex-wrap gap-2">.map(skill => (
+                {['Scrum', 'Agile', 'Git Flow'].map(skill => (-800 rounded-full text-sm font-mono dark:text-white">{skill}</span>
                   <span key={skill} className="px-3 py-1 bg-gray-200 dark:bg-gray-800 rounded-full text-sm font-mono dark:text-white">{skill}</span>
-                ))}
+                ))}>
               </div>
             </div>
-          </div>
+          </div> className="font-semibold mb-3">Backend</h4>
         </section>
-        {/* Idiomas (compacto) */}
-        <section className="px-8 pb-4 pt-0 print:pt-0">
+        {/* Idiomas (compacto) */}js', 'Prisma'].map(skill => (
+        <section className="px-8 pb-4 pt-0 print:pt-0">0 dark:bg-gray-800 rounded-full text-sm font-mono dark:text-white">{skill}</span>
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <h3 className="text-base font-mono font-semibold m-0 dark:text-white border-none p-0">Idiomas:</h3>
+            <h3 className="text-base font-mono font-semibold m-0 dark:text-white border-none p-0">Idiomas:</h3>>
             <span className="dark:text-white">Español (Nativo)</span>
             <span className="opacity-60">|</span>
-            <span className="dark:text-white">Inglés (Básico)</span>
+            <span className="dark:text-white">Inglés (Básico)</span> className="font-semibold mb-3">Herramientas</h4>
           </div>
-        </section>
-      </div>
+        </section>.map(skill => (
+      </div>ay-200 dark:bg-gray-800 rounded-full text-sm font-mono dark:text-white">{skill}</span>
       <style jsx global>{`
-        @media print {
+        @media print {>
           @page { size: A4 portrait; margin: 10mm; }
           html, body, #__next, .cv-root {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            background: #fff !important;
-          }
+            -webkit-print-color-adjust: exact !important;4 className="font-semibold mb-3">Metodologías</h4>
+            print-color-adjust: exact !important; className="flex flex-wrap gap-2">
+            background: #fff !important;, 'Git Flow'].map(skill => (
+          }1 bg-gray-200 dark:bg-gray-800 rounded-full text-sm font-mono dark:text-white">{skill}</span>
           /* Neutralizar posibles fondos oscuros heredados */
           .dark & { background: #fff !important; }
           .dark .cv-root { background: #fff !important; }
           .dark .cv-root * { background-color: transparent !important; }
           body, .cv-root { font-size: 11px !important; line-height: 1.25; }
-          .cv-root .p-8 { padding: 18px !important; }
-          section.p-8 { padding: 14px 18px !important; }
-          .cv-root h1 { font-size: 22pt !important; margin-bottom: 4px !important; }
-          .cv-root h2 { font-size: 12pt !important; margin-bottom: 6px !important; }
-            .cv-root h3 { font-size: 11pt !important; margin-bottom: 6px !important; }
+          .cv-root .p-8 { padding: 18px !important; }mas (compacto) */}
+          section.p-8 { padding: 14px 18px !important; }lassName="px-8 pb-4 pt-0 print:pt-0">
+          .cv-root h1 { font-size: 22pt !important; margin-bottom: 4px !important; }iv className="flex flex-wrap items-center gap-2 text-sm">
+          .cv-root h2 { font-size: 12pt !important; margin-bottom: 6px !important; }"text-base font-mono font-semibold m-0 dark:text-white border-none p-0">Idiomas:</h3>
+            .cv-root h3 { font-size: 11pt !important; margin-bottom: 6px !important; }sName="dark:text-white">Español (Nativo)</span>
           .cv-root h4 { font-size: 10pt !important; margin-bottom: 2px !important; }
-          .cv-root p, .cv-root li, .cv-root span { font-size: 10pt !important; }
+          .cv-root p, .cv-root li, .cv-root span { font-size: 10pt !important; }ite">Inglés (Básico)</span>
           .cv-root ul { margin: 2px 0 6px 0 !important; }
           .cv-root .mb-6 { margin-bottom: 10px !important; }
           .cv-root .mt-2 { margin-top: 4px !important; }
-          .cv-root .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 10px !important; }
+          .cv-root .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 10px !important; }e jsx global>{`
           /* Badges más compactas */
-          .cv-root span.rounded-full { padding: 2px 6px !important; font-size: 9pt !important; }
+          .cv-root span.rounded-full { padding: 2px 6px !important; font-size: 9pt !important; } }
           /* Ocultar controles no necesarios */
           .print\\:hidden, .cv-root button, .cv-root [role="button"] { display: none !important; }
           /* Forzar texto negro */
           h1, h2, h3, h4, h5, h6, p, span, li, td, th, a { color: #000 !important; -webkit-text-fill-color: #000 !important; }
+          * { box-shadow: none !important; text-shadow: none !important; }
+        }
+      `}</style>
+    </div>
+  )
+}
           * { box-shadow: none !important; text-shadow: none !important; }
         }
       `}</style>
