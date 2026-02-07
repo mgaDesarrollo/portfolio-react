@@ -26,6 +26,18 @@ interface ProjectFormProps {
   onCancel: () => void
 }
 
+// Helper function to ensure technologies is always an array
+const ensureTechnologiesArray = (technologies: unknown): string[] => {
+  if (Array.isArray(technologies)) {
+    return technologies.filter((t): t is string => typeof t === "string")
+  }
+  if (typeof technologies === "string" && technologies.trim()) {
+    // Handle comma-separated string
+    return technologies.split(",").map((t) => t.trim()).filter(Boolean)
+  }
+  return []
+}
+
 export function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
   const [formData, setFormData] = useState({
     title: project?.title || "",
@@ -33,7 +45,7 @@ export function ProjectForm({ project, onSave, onCancel }: ProjectFormProps) {
     image: project?.image || "",
     liveUrl: project?.liveUrl || "",
     githubUrl: project?.githubUrl || "",
-    technologies: project?.technologies || [],
+    technologies: ensureTechnologiesArray(project?.technologies),
   })
   const [imagePreview, setImagePreview] = useState<string>(formData.image || "")
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
