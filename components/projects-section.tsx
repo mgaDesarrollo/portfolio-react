@@ -56,36 +56,42 @@ export function ProjectsSection() {
 
   // Eliminar lógica de localStorage
 
-  const handleSaveProject = (projectData: Omit<Project, "id">) => {
-    if (editingProject) {
-      // Actualizar proyecto en la base de datos
-      fetch("/api/projects", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...projectData, id: editingProject.id }),
-      })
-        .then((res) => res.json())
-        .then(() => {
-          fetch("/api/projects")
-            .then((res) => res.json())
-            .then((data) => setProjects(data))
+  const handleSaveProject = async (projectData: Omit<Project, "id">) => {
+    try {
+      if (editingProject) {
+        // Actualizar proyecto en la base de datos
+        const response = await fetch("/api/projects", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...projectData, id: editingProject.id }),
         })
-    } else {
-      // Crear nuevo proyecto en la base de datos (sin id)
-      const { id, ...dataToSend } = projectData as any
-      fetch("/api/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dataToSend),
-      })
-        .then((res) => res.json())
-        .then(() => {
-          fetch("/api/projects")
-            .then((res) => res.json())
-            .then((data) => setProjects(data))
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || "Error al actualizar proyecto")
+        }
+      } else {
+        // Crear nuevo proyecto en la base de datos
+        const response = await fetch("/api/projects", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(projectData),
         })
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || "Error al crear proyecto")
+        }
+      }
+      // Recargar proyectos después de guardar
+      const projectsResponse = await fetch("/api/projects")
+      const data = await projectsResponse.json()
+      setProjects(data)
+      setIsModalOpen(false)
+    } catch (error) {
+      console.error("Error saving project:", error)
+      alert(error instanceof Error ? error.message : "Error al guardar proyecto")
+    } finally {
+      setEditingProject(undefined)
     }
-    setEditingProject(undefined)
   }
 
   const handleEditProject = (project: Project) => {
@@ -93,17 +99,23 @@ export function ProjectsSection() {
     setIsModalOpen(true)
   }
 
-  const handleDeleteProject = (projectId: string) => {
+  const handleDeleteProject = async (projectId: string) => {
     if (confirm("¿Estás seguro de que quieres eliminar este proyecto?")) {
-      fetch("/api/projects", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: Number(projectId) }),
-      })
-        .then((res) => res.json())
-        .then(() => {
-          setProjects((prev) => prev.filter((p) => String(p.id) !== String(projectId)))
+      try {
+        const response = await fetch("/api/projects", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: projectId }),
         })
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || "Error al eliminar proyecto")
+        }
+        setProjects((prev) => prev.filter((p) => String(p.id) !== String(projectId)))
+      } catch (error) {
+        console.error("Error deleting project:", error)
+        alert(error instanceof Error ? error.message : "Error al eliminar proyecto")
+      }
     }
   }
 
@@ -158,7 +170,7 @@ export function ProjectsSection() {
           )}
         </div>
 
-  <div className="relative max-w-6xl mx-auto">
+        <div className="relative max-w-6xl mx-auto">
           <Carousel opts={{ align: 'start' }}>
             <CarouselContent>
               {projects.map((project) => (

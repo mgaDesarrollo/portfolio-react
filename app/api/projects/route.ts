@@ -25,17 +25,35 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const data = await request.json()
-  const { id, ...rest } = data
-  const project = await prisma.project.update({
-    where: { id },
-    data: rest,
-  })
-  return NextResponse.json(project)
+  try {
+    const data = await request.json()
+    const { id, ...rest } = data
+    // Convertir array de tecnologías a string si existe
+    if (Array.isArray(rest.technologies)) {
+      rest.technologies = rest.technologies.join(",")
+    }
+    // Asegurar que el ID sea un número
+    const numericId = typeof id === "string" ? parseInt(id, 10) : id
+    const project = await prisma.project.update({
+      where: { id: numericId },
+      data: rest,
+    })
+    return NextResponse.json(project)
+  } catch (error) {
+    console.error("Error updating project:", error)
+    return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 })
+  }
 }
 
 export async function DELETE(request: Request) {
-  const { id } = await request.json()
-  await prisma.project.delete({ where: { id } })
-  return NextResponse.json({ success: true })
+  try {
+    const { id } = await request.json()
+    // Asegurar que el ID sea un número
+    const numericId = typeof id === "string" ? parseInt(id, 10) : id
+    await prisma.project.delete({ where: { id: numericId } })
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error("Error deleting project:", error)
+    return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 })
+  }
 }
