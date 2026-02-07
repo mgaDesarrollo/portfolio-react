@@ -63,6 +63,7 @@ export function ProjectsSection() {
         const response = await fetch("/api/projects", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify({ ...projectData, id: editingProject.id }),
         })
         if (!response.ok) {
@@ -74,6 +75,7 @@ export function ProjectsSection() {
         const response = await fetch("/api/projects", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(projectData),
         })
         if (!response.ok) {
@@ -105,6 +107,7 @@ export function ProjectsSection() {
         const response = await fetch("/api/projects", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify({ id: projectId }),
         })
         if (!response.ok) {
