@@ -2,13 +2,13 @@ import { prisma } from '../lib/prisma'
 import * as bcrypt from 'bcryptjs'
 
 async function main() {
-  const password = await bcrypt.hash('123456', 10)
+  const password = await bcrypt.hash('admin123', 10)
   await prisma.user.upsert({
     where: { username: 'admin' },
-    update: {},
+    update: { password },
     create: { username: 'admin', password },
   })
-  console.log('Usuario admin listo (admin / 123456)')
+  console.log('Usuario admin listo (admin / admin123)')
 }
 
-main().finally(()=> process.exit(0))
+main().finally(() => process.exit(0))
