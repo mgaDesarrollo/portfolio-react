@@ -1,11 +1,11 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import jwt from 'jsonwebtoken'
+import { jwtVerify } from 'jose'
 
 // Rutas y métodos protegidos
 const PROTECTED_PREFIXES = ['/api/projects', '/api/upload']
 const PROTECTED_METHODS = ['POST', 'PUT', 'DELETE']
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
   const method = req.method
 
@@ -16,8 +16,10 @@ export function middleware(req: NextRequest) {
   if (!token) {
     return NextResponse.json({ error: 'No autenticado' }, { status: 401 })
   }
+
   try {
-    jwt.verify(token, process.env.JWT_SECRET!)
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET!)
+    await jwtVerify(token, secret)
     return NextResponse.next()
   } catch {
     return NextResponse.json({ error: 'Token inválido' }, { status: 401 })
@@ -27,3 +29,4 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/api/:path*']
 }
+
