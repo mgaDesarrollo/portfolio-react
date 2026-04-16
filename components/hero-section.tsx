@@ -1,90 +1,103 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Download, Globe, Phone } from "lucide-react"
-// Eliminado uso de Avatar primitives para poder usar next/image con blur y evitar error de contexto
+import { Github, Linkedin, Mail, Download, ArrowDown } from "lucide-react"
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export function HeroSection() {
-  const [displayedText, setDisplayedText] = useState("")
-  const fullText = "Mario Gabriel Avendaño"
-
-  useEffect(() => {
-    let currentIndex = 0
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setDisplayedText(fullText.slice(0, currentIndex))
-        currentIndex++
-      } else {
-        clearInterval(typingInterval)
-      }
-    }, 100)
-
-    return () => clearInterval(typingInterval)
-  }, [])
-
-  // Parallax state
-  const [offset, setOffset] = useState(0)
   const [imageError, setImageError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
-  // Fallback para nombre de archivo incorrecto (en public aparece como profile.jpg.jpg actualmente)
   const [imageSrc, setImageSrc] = useState<string>("/profile.jpg")
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY
-      setOffset(y * 0.15) // ajuste velocidad
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   return (
     <section
       id="inicio"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden pt-28 md:pt-0 scroll-mt-24"
+      className="min-h-screen flex items-center px-4 sm:px-6 lg:px-8 relative overflow-hidden pt-24 md:pt-0 scroll-mt-24"
     >
-      {/* Pattern grid background responsive to theme */}
+      {/* Subtle gradient background */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,theme(colors.primary/15),transparent_70%)] dark:bg-[radial-gradient(circle_at_center,theme(colors.primary/25),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
       />
+      
+      {/* Subtle grid pattern */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-60 mix-blend-multiply dark:mix-blend-normal bg-[linear-gradient(theme(colors.primary/10)_1px,transparent_1px),linear-gradient(90deg,theme(colors.primary/10)_1px,transparent_1px)] [background-size:40px_40px]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:60px_60px]"
       />
-      <div className="absolute inset-0 bg-white/65 dark:bg-black/80 backdrop-blur-[2px]" aria-hidden />
-      {/* Gradient accent blobs */}
-  <div aria-hidden style={{ transform: `translate3d(${offset * 0.4}px, ${offset * -0.3}px, 0)` }} className="transition-transform duration-300 will-change-transform absolute -top-40 -left-40 h-[480px] w-[480px] rounded-full bg-gradient-to-br from-emerald-400/40 via-emerald-500/20 to-transparent blur-3xl opacity-70 dark:opacity-40" />
-  <div aria-hidden style={{ transform: `translate3d(${offset * -0.35}px, ${offset * 0.25}px, 0)` }} className="transition-transform duration-300 will-change-transform absolute top-1/3 -right-32 h-[420px] w-[420px] rounded-full bg-gradient-to-tr from-emerald-500/30 via-teal-400/10 to-transparent blur-3xl opacity-60 dark:opacity-35" />
-      {/* Animated beam */}
-      <div aria-hidden className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute left-1/2 top-0 h-full w-[140px] -translate-x-1/2 bg-gradient-to-b from-emerald-400/15 via-emerald-300/0 to-transparent blur-2xl animate-pulse" />
-      </div>
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <div className="mb-8">
-          {/* Avatar (profile photo) with subtle glow and hover ring */}
-          <div className="flex flex-col items-center justify-center mb-8">
-            <div
-              className="relative group"
-              style={{ transform: `translate3d(0, ${offset * 0.05}px, 0)` }}
-            >
-              {/* Rotating subtle animated ring */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -inset-4 rounded-full bg-[conic-gradient(from_var(--angle),theme(colors.emerald.400/.35),theme(colors.emerald.300/.15),theme(colors.emerald.500/.35))] opacity-45 group-hover:opacity-75 blur-sm animate-[spin_16s_linear_infinite] [mask:radial-gradient(circle,transparent_60%,black_62%)]"
-              />
-              {/* Static glow */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-400/40 via-emerald-300/15 to-emerald-500/40 blur-2xl opacity-60 group-hover:opacity-80 transition-opacity"
-              />
-              <div className="relative h-40 w-40 sm:h-48 sm:w-48 rounded-full overflow-hidden border border-emerald-400/40 shadow-lg shadow-emerald-500/10 transition-all duration-300">
+
+      <div className="max-w-6xl mx-auto w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* Left column - Text content */}
+          <div className="order-2 lg:order-1">
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 tracking-wider uppercase mb-4">
+              Desarrollador Front-end
+            </p>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-slate-900 dark:text-slate-100 leading-tight">
+              Mario Gabriel{" "}
+              <span className="text-slate-600 dark:text-slate-400">Avendaño</span>
+            </h1>
+            
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-lg leading-relaxed">
+              Especializado en crear aplicaciones web modernas con{" "}
+              <span className="font-semibold text-slate-700 dark:text-slate-300">React</span>,{" "}
+              <span className="font-semibold text-slate-700 dark:text-slate-300">Next.js</span> y{" "}
+              <span className="font-semibold text-slate-700 dark:text-slate-300">PostgreSQL</span>.
+              Transformo ideas en experiencias digitales excepcionales.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <Button asChild size="lg" className="font-medium bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900">
+                <a href="mailto:mariogabriel.dvlp@gmail.com">
+                  <Mail className="mr-2 h-4 w-4" /> Contactar
+                </a>
+              </Button>
+              <Button variant="outline" size="lg" className="font-medium border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800" asChild>
+                <a href="/curriculum" target="_blank" rel="noopener noreferrer">
+                  <Download className="mr-2 h-4 w-4" /> Ver CV
+                </a>
+              </Button>
+            </div>
+
+            {/* Social links */}
+            <div className="flex items-center gap-4">
+              <a 
+                href="https://github.com/tuusuario" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors"
+                aria-label="GitHub"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://linkedin.com/in/tuusuario" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Right column - Profile image */}
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <div className="relative">
+              {/* Subtle ring */}
+              <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-600 opacity-50 blur-sm" />
+              
+              <div className="relative h-56 w-56 sm:h-64 sm:w-64 lg:h-80 lg:w-80 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl shadow-slate-200/50 dark:shadow-slate-900/50">
                 {!imageLoaded && !imageError && (
-                  <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-emerald-500/10 to-emerald-700/10" />
+                  <div className="absolute inset-0 animate-pulse bg-slate-200 dark:bg-slate-700" />
                 )}
                 {imageError && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-emerald-700/30 text-primary font-semibold backdrop-blur-sm">
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 font-semibold text-2xl">
                     MG
                   </div>
                 )}
@@ -93,7 +106,7 @@ export function HeroSection() {
                   alt="Foto de perfil de Mario Gabriel Avendaño"
                   fill
                   priority
-                  sizes="(max-width: 640px) 168px, 256px"
+                  sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 320px"
                   className={"object-cover transition-opacity duration-500 " + (imageLoaded ? 'opacity-100' : 'opacity-0')}
                   placeholder="blur"
                   onLoadingComplete={() => setImageLoaded(true)}
@@ -108,38 +121,12 @@ export function HeroSection() {
               </div>
             </div>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-bold mb-4 text-balance font-mono min-h-[1.2em] relative">
-            <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-500 dark:from-emerald-300 dark:via-emerald-400 dark:to-emerald-500 bg-[length:200%_100%] bg-clip-text text-transparent animate-[gradient-move_6s_linear_infinite] drop-shadow-sm">
-              {displayedText}
-            </span>
-            <span className="animate-pulse text-emerald-400">|</span>
-          </h1>
-          <p className="relative text-xl sm:text-2xl text-muted-foreground mb-6 text-balance">
-            <span className="relative z-10 supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.25)] dark:supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.6)]">Desarrollador Front-end</span>
-            <span aria-hidden className="pointer-events-none absolute inset-0 blur-xl opacity-20 bg-gradient-to-r from-emerald-400/30 via-emerald-300/15 to-emerald-500/30 animate-pulse" />
-          </p>
-          <p className="relative text-lg text-muted-foreground max-w-2xl mx-auto mb-8 text-pretty">
-            <span className="relative z-10 supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.2)] dark:supports-[text-shadow]:[text-shadow:0_1px_0_rgba(0,0,0,0.55)]">
-            Especializado en crear aplicaciones web modernas con{" "}
-            <span className="text-primary font-semibold">React</span>,{" "}
-            <span className="text-primary font-semibold">Next.js</span> y{" "}
-            <span className="text-primary font-semibold">PostgreSQL</span>. Transformo ideas en experiencias digitales excepcionales y siempre estoy dispuesto a aprender nuevas tecnologías y afrontar nuevos retos.
-            </span>
-            <span aria-hidden className="pointer-events-none absolute -inset-x-8 -bottom-2 -top-2 blur-2xl opacity-10 bg-gradient-to-r from-emerald-400/25 via-emerald-300/8 to-emerald-500/25" />
-          </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button asChild size="lg" className="font-semibold">
-            <a href="mailto:mariogabriel.dvlp@gmail.com">
-              <Mail className="mr-2 h-4 w-4" /> Contactar
-            </a>
-          </Button>
-          <Button variant="outline" size="lg" className="font-semibold bg-transparent" asChild>
-            <a href="/curriculum" target="_blank" rel="noopener noreferrer">
-              <Download className="mr-2 h-4 w-4" /> Ver CV
-            </a>
-          </Button>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-slate-400 dark:text-slate-600">
+          <span className="text-xs tracking-wider uppercase">Scroll</span>
+          <ArrowDown className="h-4 w-4 animate-bounce" />
         </div>
       </div>
     </section>
