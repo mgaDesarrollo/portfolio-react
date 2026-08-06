@@ -1,84 +1,93 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Globe } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Mail, MapPin, Phone, Github, Linkedin, Globe } from "lucide-react"
+
+const AVAILABILITY = ["Remoto", "Híbrido", "Freelance", "Full-time"]
+
+const LINKS = [
+  { icon: Mail, label: "mariogabriel.dvlp@gmail.com", href: "mailto:mariogabriel.dvlp@gmail.com" },
+  { icon: Phone, label: "+54 351 650 3188", href: "tel:+543516503188" },
+  { icon: Github, label: "github.com/mgaDesarrollo", href: "https://github.com/mgaDesarrollo" },
+  { icon: Linkedin, label: "LinkedIn / Perfil", href: "https://www.linkedin.com/in/gabriel-avendaño-4334a02a5" },
+  { icon: Globe, label: "Portfolio", href: "https://portfolio-react-3pol.vercel.app" },
+  { icon: MapPin, label: "Córdoba, Argentina", href: null },
+]
 
 export function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Aquí iría la lógica para enviar el formulario
-    console.log("Formulario enviado:", formData)
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
-
   return (
-    <section id="contacto" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+    <section id="contacto" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">Contacto</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-            ¿Tienes un proyecto en mente? Me encantaría escuchar sobre tu idea y cómo podemos trabajar juntos para
-            hacerla realidad.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+            ¿Tenés un proyecto o una oportunidad laboral? Estoy disponible y listo para sumarme a tu equipo.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          {/* Información de contacto */}
-          <div className="space-y-8">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6">Hablemos</h3>
-              <p className="text-muted-foreground mb-8 text-pretty max-w-2xl mx-auto">
-                Estoy siempre abierto a discutir nuevas oportunidades, proyectos interesantes o simplemente charlar
-                sobre tecnología.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center max-w-xl mx-auto">
-              <div className="flex items-center justify-center gap-2 border rounded-md py-3 px-4 bg-card/40 hover:shadow-sm transition-shadow">
-                <Mail className="h-5 w-5 text-primary" />
-                <a href="mailto:mariogabriel.dvlp@gmail.com" className="hover:underline">mariogabriel.dvlp@gmail.com</a>
-              </div>
-              <div className="flex items-center justify-center gap-2 border rounded-md py-3 px-4 bg-card/40 hover:shadow-sm transition-shadow">
-                <Phone className="h-5 w-5 text-primary" />
-                <a href="tel:+543516503188" className="hover:underline">+54 351 650 3188</a>
-              </div>
-              <div className="flex items-center justify-center gap-2 border rounded-md py-3 px-4 bg-card/40 hover:shadow-sm transition-shadow">
-                <Github className="h-5 w-5 text-primary" />
-                <a href="https://github.com/mgaDesarrollo" target="_blank" rel="noopener noreferrer" className="hover:underline">github.com/mgaDesarrollo</a>
-              </div>
-              <div className="flex items-center justify-center gap-2 border rounded-md py-3 px-4 bg-card/40 hover:shadow-sm transition-shadow">
-                <Linkedin className="h-5 w-5 text-primary" />
-                <a href="https://www.linkedin.com/in/gabriel-avendaño-4334a02a5" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn / Perfil</a>
-              </div>
-              <div className="flex items-center justify-center gap-2 border rounded-md py-3 px-4 bg-card/40 hover:shadow-sm transition-shadow">
-                <Globe className="h-5 w-5 text-primary" />
-                <a href="https://portfolio-react-3pol.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:underline">Portfolio</a>
-              </div>
-              <div className="flex items-center justify-center gap-2 border rounded-md py-3 px-4 bg-card/40 hover:shadow-sm transition-shadow">
-                <MapPin className="h-5 w-5 text-primary" />
-                <span>Córdoba, Argentina</span>
-              </div>
-            </div>
+        {/* Availability banner */}
+        <div className="rounded-2xl border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/20 p-6 mb-10 text-center">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span className="font-semibold text-emerald-700 dark:text-emerald-400">Disponible para trabajar</span>
           </div>
+          <div className="flex flex-wrap justify-center gap-2">
+            {AVAILABILITY.map((a) => (
+              <Badge
+                key={a}
+                variant="outline"
+                className="border-emerald-400/50 text-emerald-700 dark:text-emerald-400 bg-emerald-100/50 dark:bg-emerald-900/30"
+              >
+                {a}
+              </Badge>
+            ))}
+          </div>
+        </div>
+
+        {/* Main CTA */}
+        <div className="text-center mb-12">
+          <Button
+            asChild
+            size="lg"
+            className="text-base font-semibold px-10 py-6 h-auto bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 shadow-lg hover:shadow-xl transition-all duration-300 group"
+          >
+            <a href="mailto:mariogabriel.dvlp@gmail.com">
+              Trabajemos juntos →
+            </a>
+          </Button>
+          <p className="text-sm text-muted-foreground mt-3">
+            O escribime directamente por cualquiera de estos medios
+          </p>
+        </div>
+
+        {/* Contact links grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl mx-auto">
+          {LINKS.map(({ icon: Icon, label, href }) =>
+            href ? (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="flex items-center gap-3 border rounded-xl py-3 px-4 bg-card hover:shadow-md hover:border-primary/30 transition-all duration-200 group"
+              >
+                <Icon className="h-4 w-4 text-primary flex-shrink-0" />
+                <span className="text-sm truncate group-hover:text-primary transition-colors">{label}</span>
+              </a>
+            ) : (
+              <div
+                key={label}
+                className="flex items-center gap-3 border rounded-xl py-3 px-4 bg-card"
+              >
+                <Icon className="h-4 w-4 text-primary flex-shrink-0" />
+                <span className="text-sm text-muted-foreground">{label}</span>
+              </div>
+            )
+          )}
         </div>
       </div>
     </section>
