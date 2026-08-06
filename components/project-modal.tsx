@@ -1,6 +1,6 @@
 "use client"
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { ProjectForm, type Project } from "./project-form"
 
 interface ProjectModalProps {
@@ -21,6 +21,9 @@ export function ProjectModal({ isOpen, onClose, project, onSave }: ProjectModalP
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{project ? "Editar Proyecto" : "Nuevo Proyecto"}</DialogTitle>
+          <DialogDescription className="sr-only">
+            Formulario para crear o editar la información del proyecto
+          </DialogDescription>
         </DialogHeader>
         <ProjectForm project={project} onSave={handleSave} onCancel={onClose} />
       </DialogContent>

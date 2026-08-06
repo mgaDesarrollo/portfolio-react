@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server"
-import { writeFile } from "fs/promises"
-import path from "path"
 
 export async function POST(request: Request) {
-  const formData = await request.formData()
-  const file = formData.get("file") as File
-  if (!file) {
-    return NextResponse.json({ error: "No file uploaded" }, { status: 400 })
+  try {
+    const formData = await request.formData()
+    const file = formData.get("file") as File
+    if (!file) {
+      return NextResponse.json({ error: "No file uploaded" }, { status: 400 })
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer())
+    const base64Image = buffer.toString("base64")
+    const imageUrl = `data:${file.type};base64,${base64Image}`
+
+    return NextResponse.json({ url: imageUrl })
+  } catch (error) {
+    console.error("Upload error:", error)
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
   }
-
-  const buffer = Buffer.from(await file.arrayBuffer())
-  const filename = `${Date.now()}-${file.name}`.replace(/\s+/g, "-")
-  const filePath = path.join(process.cwd(), "public", filename)
-
-  await writeFile(filePath, buffer)
-
-  const imageUrl = `/${filename}`
-  return NextResponse.json({ url: imageUrl })
 }
