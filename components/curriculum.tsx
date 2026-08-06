@@ -195,7 +195,7 @@ export default function Curriculum() {
             <div>
               <h4 className="font-semibold mb-3">Backend</h4>
               <div className="flex flex-wrap gap-2">
-                {['Node.js', 'PostgreSQL', 'Express.js', 'Prisma'].map(skill => (
+                {['Node.js', 'Java', 'PostgreSQL', 'Express.js', 'Prisma'].map(skill => (
                   <span key={skill} className="px-3 py-1 bg-gray-200 dark:bg-gray-800 rounded-full text-sm font-mono dark:text-white">{skill}</span>
                 ))}
               </div>

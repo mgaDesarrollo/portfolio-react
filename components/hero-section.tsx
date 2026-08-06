@@ -88,11 +88,21 @@ export function HeroSection() {
 
           {/* Right column - Profile image */}
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div className="relative">
-              {/* Subtle ring */}
-              <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-600 opacity-50 blur-sm" />
+            <div className="relative group">
+              {/* Subtle background glow */}
+              <div 
+                aria-hidden
+                className="absolute -inset-4 bg-gradient-to-tr from-slate-200 to-slate-300 dark:from-slate-800 dark:to-slate-700 rounded-[2rem] blur-xl opacity-60 group-hover:opacity-85 transition-opacity duration-300" 
+              />
               
-              <div className="relative h-56 w-56 sm:h-64 sm:w-64 lg:h-80 lg:w-80 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl shadow-slate-200/50 dark:shadow-slate-900/50">
+              {/* Offset decorative border for premium design */}
+              <div 
+                aria-hidden
+                className="absolute inset-0 border border-slate-300/60 dark:border-slate-800/60 rounded-[1.8rem] translate-x-3 translate-y-3 -z-10 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-300" 
+              />
+              
+              {/* Main image card container */}
+              <div className="relative w-[260px] h-[325px] sm:w-[290px] sm:h-[362px] lg:w-[330px] lg:h-[412px] rounded-[1.8rem] overflow-hidden border-4 border-white dark:border-slate-950 bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-slate-950/80 transition-transform duration-300 group-hover:scale-[1.01]">
                 {!imageLoaded && !imageError && (
                   <div className="absolute inset-0 animate-pulse bg-slate-200 dark:bg-slate-700" />
                 )}
@@ -106,10 +116,10 @@ export function HeroSection() {
                   alt="Foto de perfil de Mario Gabriel Avendaño"
                   fill
                   priority
-                  sizes="(max-width: 640px) 224px, (max-width: 1024px) 256px, 320px"
+                  sizes="(max-width: 640px) 260px, (max-width: 1024px) 290px, 330px"
                   className={"object-cover transition-opacity duration-500 " + (imageLoaded ? 'opacity-100' : 'opacity-0')}
                   placeholder="blur"
-                  onLoadingComplete={() => setImageLoaded(true)}
+                  onLoad={() => setImageLoaded(true)}
                   onError={() => {
                     if (!imageError) {
                       setImageError(true)

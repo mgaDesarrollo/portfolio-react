@@ -11,7 +11,7 @@ export function AboutSection() {
     {
       icon: Database,
       title: "Backend Development",
-      description: "Node.js, PostgreSQL, API REST, Prisma",
+      description: "Node.js, Java, PostgreSQL, API REST, Prisma",
     },
     {
       icon: Zap,
