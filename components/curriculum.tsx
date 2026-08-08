@@ -55,7 +55,7 @@ export default function Curriculum() {
             {/* Bloque Izquierdo con Avatar + Datos */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-6">
               <div className="relative mx-auto sm:mx-0 print:h-28 print:w-28">
-                <div className="relative h-32 w-32 print:h-28 print:w-28 rounded-full overflow-hidden border border-emerald-500/40 shadow shadow-emerald-500/10 print:border-gray-400 print:shadow-none">
+                <div className="relative h-32 w-32 print:h-28 print:w-28 rounded-none overflow-hidden border border-emerald-500/40 shadow shadow-emerald-500/10 print:border-gray-400 print:shadow-none">
                   <figure className="photo">
                     <img
                       src="/profile.jpg"
@@ -64,7 +64,7 @@ export default function Curriculum() {
                   </figure>
                 </div>
                 {/* Glow suave sólo en pantalla, no en print */}
-                <span aria-hidden className="hidden print:hidden sm:block absolute -inset-1 rounded-full bg-emerald-400/20 blur-xl" />
+                <span aria-hidden className="hidden print:hidden sm:block absolute -inset-1 rounded-none bg-emerald-400/20 blur-xl" />
               </div>
               <div>
                 <h1 className="text-4xl font-mono font-bold mb-2 dark:text-white print:mb-1">Mario Gabriel Avendaño</h1>
