@@ -20,7 +20,7 @@ export function Footer() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            Actualmente buscando nuevas oportunidades · Disponible para trabajo remoto
+            Actualmente buscando nuevas oportunidades · Disponible para trabajo presencial, híbrido o remoto
           </div>
         </div>
 
@@ -36,7 +36,7 @@ export function Footer() {
             <Github className="h-4 w-4" /> GitHub
           </a>
           <a
-            href="https://www.linkedin.com/in/gabriel-avendaño-4334a02a5"
+            href="https://www.linkedin.com/in/mario-gabriel-avenda%C3%B1o-4334a02a5/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"

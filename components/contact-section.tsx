@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Mail, MapPin, Phone, Github, Linkedin, Globe } from "lucide-react"
 
-const AVAILABILITY = ["Remoto", "Híbrido", "Freelance", "Full-time"]
+const AVAILABILITY = ["Remoto", "Híbrido", "Presencial", "Freelance", "Full-time"]
 
 const LINKS = [
   { icon: Mail, label: "mariogabriel.dvlp@gmail.com", href: "mailto:mariogabriel.dvlp@gmail.com" },
   { icon: Phone, label: "+54 351 650 3188", href: "tel:+543516503188" },
   { icon: Github, label: "github.com/mgaDesarrollo", href: "https://github.com/mgaDesarrollo" },
-  { icon: Linkedin, label: "LinkedIn / Perfil", href: "https://www.linkedin.com/in/gabriel-avendaño-4334a02a5" },
-  { icon: Globe, label: "Portfolio", href: "https://portfolio-react-3pol.vercel.app" },
+  { icon: Linkedin, label: "LinkedIn / Perfil", href: "https://www.linkedin.com/in/mario-gabriel-avenda%C3%B1o-4334a02a5/" },
+  { icon: Globe, label: "Portfolio", href: "https://portfolio-react-orcin-rho.vercel.app/" },
   { icon: MapPin, label: "Córdoba, Argentina", href: null },
 ]
 

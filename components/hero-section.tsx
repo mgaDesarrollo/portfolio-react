@@ -121,7 +121,7 @@ export function HeroSection() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://www.linkedin.com/in/gabriel-avendaño-4334a02a5"
+                href="https://www.linkedin.com/in/mario-gabriel-avenda%C3%B1o-4334a02a5/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"

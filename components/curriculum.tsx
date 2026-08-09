@@ -55,10 +55,13 @@ export default function Curriculum() {
             {/* Bloque Izquierdo con Avatar + Datos */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-6">
               <div className="relative mx-auto sm:mx-0 h-32 w-32 print:h-28 print:w-28 overflow-hidden rounded-none">
-                <img
+                <Image
                   src="/profile-cv.jpg"
                   alt="Foto de perfil de Mario Gabriel Avendaño"
-                  className="w-full h-full object-cover"
+                  fill
+                  priority
+                  unoptimized
+                  className="object-cover"
                   style={{
                     objectPosition: '50% 20%',
                     transform: 'scale(1.15)',
@@ -84,11 +87,11 @@ export default function Curriculum() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Linkedin className="h-4 w-4 text-primary print:text-black" />
-                    <a href="https://www.linkedin.com/in/gabriel-avendaño-4334a02a5" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn / Perfil</a>
+                    <a href="https://www.linkedin.com/in/mario-gabriel-avenda%C3%B1o-4334a02a5/" target="_blank" rel="noopener noreferrer" className="hover:underline">https://www.linkedin.com/in/mario-gabriel-avendaño-4334a02a5/</a>
                   </div>
                   <div className="flex items-center gap-2 sm:col-span-2">
                     <Globe className="h-4 w-4 text-primary print:text-black" />
-                    <a href="https://portfolio-react-3pol.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:underline">Portfolio Web</a>
+                    <a href="https://portfolio-react-orcin-rho.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:underline">https://portfolio-react-orcin-rho.vercel.app/</a>
                   </div>
                 </div>
               </div>
