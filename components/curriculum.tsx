@@ -68,7 +68,7 @@ export default function Curriculum() {
               </div>
               <div>
                 <h1 className="text-4xl font-mono font-bold mb-2 dark:text-white print:mb-1">Mario Gabriel Avendaño</h1>
-                <h2 className="text-xl font-light opacity-90 dark:text-white print:text-base print:opacity-100">Desarrollador Front-end</h2>
+                <h2 className="text-xl font-light opacity-90 dark:text-white print:text-sm print:opacity-100">Desarrollador Full Stack Junior | React · Next.js · Node.js · PostgreSQL</h2>
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm print:mt-2">
                   <div className="flex items-center gap-2">
                     <Mail className="h-4 w-4 text-primary print:text-black" />
@@ -109,9 +109,10 @@ export default function Curriculum() {
         <section className="p-8">
           <h3 className="text-2xl font-mono font-bold mb-4 border-b-2 pb-2 dark:text-white">Perfil Profesional</h3>
           <p className="leading-relaxed dark:text-white">
-            Desarrollador front-end con experiencia en React, Next.js y PostgreSQL. Especializado en crear
-            aplicaciones web modernas y escalables con enfoque en la experiencia del usuario y las mejores prácticas
-            de desarrollo. Apasionado por las tecnologías emergentes y el desarrollo de soluciones innovadoras.
+            Desarrollador Frontend orientado a React y Next.js, con experiencia en desarrollo de aplicaciones web y proyectos freelance. Trabajo con JavaScript/TypeScript, React, Next.js, Node.js y PostgreSQL, integrando APIs y bases de datos.
+          </p>
+          <p className="leading-relaxed dark:text-white mt-4">
+            Experiencia trabajando de forma independiente en proyectos completos, desde el desarrollo de interfaces y funcionalidades hasta la integración con backend y despliegue. Actualmente enfocado en incorporarme a un equipo de desarrollo donde pueda aportar y seguir creciendo profesionalmente.
           </p>
         </section>
         {/* Experiencia Laboral */}
@@ -121,17 +122,24 @@ export default function Curriculum() {
             <h4 className="text-lg font-semibold dark:text-white">Desarrollador de Software | SingularityNET</h4>
             <span className="text-sm opacity-80">mayo de 2025 - actualidad</span>
             <ul className="list-disc ml-6 mt-2 text-sm dark:text-white">
-              <li>Participo en el desarrollo de una aplicación de consenso y gobernanza digital sobre la plataforma SingularityNET, un ecosistema de IA descentralizado.</li>
-              <li>Colaboro en la implementación de soluciones con IA para optimizar la toma de decisiones y la gestión de la comunidad.</li>
+              <li>Desarrollo de funcionalidades para una aplicación de consenso y gobernanza digital sobre el ecosistema descentralizado de SingularityNET.</li>
+              <li>Implementación de interfaces de usuario interactivas y dinámicas utilizando Next.js y React.</li>
+              <li>Integración de servicios y APIs para gestionar la lógica de consenso y toma de decisiones de la comunidad.</li>
+              <li>Colaboración en la integración de soluciones basadas en Inteligencia Artificial y tecnologías descentralizadas.</li>
+              <li>Trabajo colaborativo con control de versiones mediante Git y GitHub.</li>
             </ul>
           </div>
           <div className="mb-6">
             <h4 className="text-lg font-semibold dark:text-white">Desarrollador Frontend Freelance</h4>
             <span className="text-sm opacity-80">enero de 2025 - actualidad</span>
             <ul className="list-disc ml-6 mt-2 text-sm dark:text-white">
-              <li>Desarrollo y mantengo proyectos web de forma independiente, gestionando el ciclo de vida completo de las aplicaciones.</li>
-              <li>Colaboro con equipos freelance para entregar soluciones de alta calidad, con un enfoque en la experiencia de usuario y la optimización del rendimiento.</li>
-              <li>Los proyectos más destacados se pueden ver en mi portafolio.</li>
+              <li>Desarrollo de aplicaciones web utilizando React, Next.js y JavaScript/TypeScript.</li>
+              <li>Implementación de interfaces responsive y componentes reutilizables con Tailwind CSS.</li>
+              <li>Integración de APIs y servicios backend para el flujo de datos.</li>
+              <li>Desarrollo de funcionalidades completas desde el diseño hasta el deployment.</li>
+              <li>Optimización de rendimiento, UX y adaptación responsive.</li>
+              <li>Gestión de código y versiones utilizando Git y GitHub.</li>
+              <li>Algunos proyectos desarrollados se encuentran disponibles en mi portfolio.</li>
             </ul>
           </div>
           <div className="mb-6">
