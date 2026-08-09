@@ -3,8 +3,8 @@ import { Code, Database, Zap, Briefcase } from "lucide-react"
 
 const STATS = [
   { value: "+3", label: "años de experiencia" },
-  { value: "+15", label: "proyectos realizados" },
-  { value: "13+", label: "tecnologías dominadas" },
+  { value: "+8", label: "proyectos realizados" },
+  { value: "+11", label: "tecnologías dominadas" },
   { value: "100%", label: "responsive design" },
 ]
 
@@ -22,7 +22,7 @@ const SKILLS = [
   {
     icon: Zap,
     title: "Performance & DevOps",
-    description: "Docker, Vercel, VPS, Git Flow, CI/CD, optimización web",
+    description: " Vercel, Git Flow, optimización web",
   },
   {
     icon: Briefcase,

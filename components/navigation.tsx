@@ -56,7 +56,6 @@ export function Navigation() {
                 {item.label}
               </Link>
             ))}
-            <ThemeToggle />
             {authenticated ? (
               <Button variant="outline" size="sm" onClick={handleLogout} className="bg-transparent">
                 Logout
@@ -70,7 +69,6 @@ export function Navigation() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle />
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} className="h-9 w-9">
               {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
