@@ -5,10 +5,16 @@ import Link from "next/link"
 import { Menu, X, Code2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useTheme } from "next-themes"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
+  const { setTheme } = useTheme()
+
+  useEffect(() => {
+    setTheme("dark")
+  }, [setTheme])
 
   useEffect(() => {
     fetch('/api/auth/me')

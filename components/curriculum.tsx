@@ -4,11 +4,17 @@ import { Download, Mail, Phone, Github, Globe, Linkedin, ArrowLeft } from "lucid
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
 export default function Curriculum() {
   const router = useRouter()
+  const { setTheme } = useTheme()
+
+  useEffect(() => {
+    setTheme("light")
+  }, [setTheme])
 
   // Forzar tema claro al imprimir (si está en modo oscuro lo quita temporalmente)
   useEffect(() => {
@@ -54,7 +60,7 @@ export default function Curriculum() {
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
             {/* Bloque Izquierdo con Avatar + Datos */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-              <div className="relative mx-auto sm:mx-0 h-32 w-32 print:h-28 print:w-28 overflow-hidden rounded-none">
+              <div className="relative mx-auto sm:mx-0 h-44 w-44 print:h-36 print:w-36 overflow-hidden rounded-none">
                 <Image
                   src="/profile-cv.jpg"
                   alt="Foto de perfil de Mario Gabriel Avendaño"
