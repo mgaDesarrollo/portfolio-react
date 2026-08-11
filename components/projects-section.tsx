@@ -26,7 +26,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Plus, Edit, Trash2 } from "lucide-react"
+import { ExternalLink, Github, Plus, Edit, Trash2, ArrowUp, ArrowDown } from "lucide-react"
 import { ProjectModal } from "./project-modal"
 import type { Project } from "./project-form"
 import { motion } from "framer-motion"
@@ -53,6 +53,46 @@ export function ProjectsSection() {
       })
       .catch(() => setIsAuthenticated(false))
   }, [])
+
+  const handleMoveProject = async (index: number, direction: 'up' | 'down') => {
+    if (
+      (direction === 'up' && index === 0) || 
+      (direction === 'down' && index === projects.length - 1)
+    ) return;
+
+    const newProjects = [...projects];
+    const swapIndex = direction === 'up' ? index - 1 : index + 1;
+    
+    // Swap items
+    const temp = newProjects[index];
+    newProjects[index] = newProjects[swapIndex];
+    newProjects[swapIndex] = temp;
+    
+    // Optimistic UI update
+    setProjects(newProjects);
+
+    // Prepare payload (project IDs with new order indices)
+    const payload = newProjects.map((p, i) => ({ id: p.id, order: i }));
+
+    try {
+      const response = await fetch("/api/projects/reorder", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al reordenar");
+      }
+    } catch (error) {
+      console.error("Error reordering projects:", error);
+      // Opcional: revertir en caso de error, o recargar
+      const res = await fetch("/api/projects");
+      const data = await res.json();
+      setProjects(data);
+    }
+  }
 
   // Eliminar lógica de localStorage
 
@@ -204,6 +244,26 @@ export function ProjectsSection() {
               <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 relative w-full h-[500px] flex flex-col group transform hover:-translate-y-2 border-border/50 hover:border-primary/30">
                 {isAuthenticated && isAdminMode && (
                   <div className="absolute top-2 right-2 z-10 flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => handleMoveProject(index, 'up')}
+                      disabled={index === 0}
+                      className="h-8 w-8 p-0 disabled:opacity-50"
+                      title="Mover arriba"
+                    >
+                      <ArrowUp className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => handleMoveProject(index, 'down')}
+                      disabled={index === projects.length - 1}
+                      className="h-8 w-8 p-0 disabled:opacity-50"
+                      title="Mover abajo"
+                    >
+                      <ArrowDown className="h-4 w-4" />
+                    </Button>
                     <Button
                       size="sm"
                       variant="secondary"

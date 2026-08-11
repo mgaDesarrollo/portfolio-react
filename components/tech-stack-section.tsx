@@ -16,9 +16,8 @@ const TECH_CATEGORIES = [
   {
     category: "Backend",
     techs: [
-      { name: "Node.js", color: "text-green-600" },
-      { name: "Express.js", color: "text-foreground" },
-      { name: "REST APIs", color: "text-purple-500" },
+      { name: "Node.js", color: "text-[#339933]" },
+      { name: "REST APIs", color: "text-[#FF4081]" },
     ],
   },
   {
@@ -33,9 +32,11 @@ const TECH_CATEGORIES = [
   {
     category: "Herramientas",
     techs: [
-      { name: "Git / GitHub", color: "text-orange-600" },
-      { name: "VS Code", color: "text-blue-500" },
-      { name: "Vite", color: "text-purple-500" },
+      { name: "Git / GitHub", color: "text-[#F05032]" },
+      { name: "VS Code", color: "text-[#007ACC]" },
+      { name: "Vite", color: "text-[#646CFF]" },
+      { name: "Sentry", color: "text-[#362D59]" },
+      { name: "Antigravity", color: "text-primary" },
     ],
   },
 ]

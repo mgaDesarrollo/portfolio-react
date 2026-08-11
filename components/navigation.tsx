@@ -42,7 +42,7 @@ export function Navigation() {
           {/* Logo */}
           <Link href="#inicio" className="flex items-center space-x-2">
             <Code2 className="h-8 w-8 text-primary" />
-            <span className="font-mono font-bold text-xl">MGA</span>
+            <span className="font-mono font-bold text-xl">Gabriel</span>
           </Link>
 
           {/* Desktop Navigation */}

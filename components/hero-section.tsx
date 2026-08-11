@@ -58,9 +58,9 @@ export function HeroSection() {
             <p className="text-base font-medium text-slate-500 dark:text-slate-400 tracking-wide mb-2">
               Hola, soy Gabriel Avendaño
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 text-slate-900 dark:text-slate-100 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 text-slate-900 dark:text-slate-100 leading-tight drop-shadow-[0_0_15px_rgba(16,185,129,0.3)] dark:drop-shadow-[0_0_15px_rgba(16,185,129,0.6)]">
               React / Next.js{" "}
-              <span className="text-slate-500 dark:text-slate-400 block mt-1">Full Stack Developer</span>
+              <span className="text-slate-500 dark:text-slate-400 block mt-1 drop-shadow-none">Full Stack Developer</span>
             </h1>
 
             {/* Concrete value proposition */}
@@ -140,19 +140,19 @@ export function HeroSection() {
                 href="https://github.com/mgaDesarrollo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-all duration-300 transform hover:-translate-y-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="p-2 text-slate-500 hover:text-emerald-500 dark:text-slate-400 dark:hover:text-emerald-400 transition-all duration-300 transform hover:-translate-y-1 rounded-md hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 hover:drop-shadow-[0_0_12px_rgba(16,185,129,0.6)]"
                 aria-label="GitHub"
               >
-                <Github className="h-5 w-5" />
+                <Github className="h-8 w-8 sm:h-10 sm:w-10" />
               </a>
               <a
                 href="https://www.linkedin.com/in/mario-gabriel-avenda%C3%B1o-4334a02a5/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-all duration-300 transform hover:-translate-y-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="p-2 text-slate-500 hover:text-emerald-500 dark:text-slate-400 dark:hover:text-emerald-400 transition-all duration-300 transform hover:-translate-y-1 rounded-md hover:bg-emerald-50/50 dark:hover:bg-emerald-900/20 hover:drop-shadow-[0_0_12px_rgba(16,185,129,0.6)]"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="h-8 w-8 sm:h-10 sm:w-10" />
               </a>
             </motion.div>
           </motion.div>
