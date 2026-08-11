@@ -57,14 +57,14 @@ export default function Curriculum() {
 
       <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-none rounded-none overflow-visible pt-4">
         {/* Header */}
-        <div className="bg-white dark:bg-black text-black dark:text-white p-8 pb-4">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
+        <div className="bg-white dark:bg-black text-black dark:text-white p-8 pb-4 print:p-4 print:pb-2">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center print:gap-4 print:flex-row">
             {/* Foto de perfil */}
             <div className="flex-shrink-0 print:block">
               <img 
                 src="/profile-cv.jpg" 
                 alt="Mario Gabriel Avendaño" 
-                className="w-36 sm:w-40 md:w-44 h-auto rounded-xl object-contain border-4 border-muted shadow-sm"
+                className="w-36 sm:w-40 md:w-44 print:w-20 print:border-2 h-auto rounded-xl object-contain border-4 border-muted shadow-sm"
               />
             </div>
             
