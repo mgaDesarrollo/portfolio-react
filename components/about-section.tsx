@@ -48,7 +48,7 @@ export function AboutSection() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">Sobre Mí</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-            <strong className="text-foreground">Desarrollador Frontend Junior especializado en React y Next.js</strong>, con experiencia práctica en el desarrollo de aplicaciones web y proyectos freelance. 
+            <strong className="text-foreground">Desarrollador Full Stack Junior especializado en React y Next.js</strong>, con experiencia práctica en el desarrollo de aplicaciones web y proyectos freelance. 
             Trabajo con JavaScript, TypeScript, React, Next.js, Node.js y PostgreSQL, desarrollando interfaces responsive, integrando APIs y conectando aplicaciones con bases de datos.
           </p>
         </motion.div>

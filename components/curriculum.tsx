@@ -105,7 +105,7 @@ export default function Curriculum() {
           <h3 className="text-lg font-mono font-bold mb-2 border-b pb-1 dark:text-white">Perfil Profesional</h3>
           <div className="space-y-2 text-sm leading-relaxed dark:text-white print:text-xs">
             <p>
-              Desarrollador Frontend Junior especializado en React y Next.js, con experiencia práctica en el desarrollo de aplicaciones web y proyectos freelance. Trabajo con JavaScript, TypeScript, React, Next.js, Node.js y PostgreSQL, desarrollando interfaces responsive, integrando APIs y conectando aplicaciones con bases de datos.
+              Desarrollador Full Stack Junior especializado en React y Next.js, con experiencia práctica en el desarrollo de aplicaciones web y proyectos freelance. Trabajo con JavaScript, TypeScript, React, Next.js, Node.js y PostgreSQL, desarrollando interfaces responsive, integrando APIs y conectando aplicaciones con bases de datos.
             </p>
             <p>
               Actualmente participo en el desarrollo de una aplicación web de gobernanza digital, trabajando con Next.js, React, PostgreSQL, Prisma y Git.
