@@ -235,49 +235,52 @@ export default function Curriculum() {
           </div>
         </section>
 
-        {/* Educación */}
-        <section className="p-8 py-4">
-          <h3 className="text-lg font-mono font-bold mb-3 border-b pb-1 dark:text-white">Educación</h3>
-          <div className="space-y-3">
-            <div>
-              <div className="flex justify-between items-baseline mb-0.5">
-                <h4 className="text-sm font-semibold dark:text-white">Técnico Superior en Programación | UTN</h4>
-                <span className="text-xs font-mono opacity-80">2015</span>
+        {/* Educación + Idiomas — en pantalla normales son secciones separadas,
+             en impresión se muestran lado a lado para ahorrar espacio */}
+        <div className="print:flex print:flex-row print:gap-6 print:px-5 print:pb-3">
+          {/* Educación */}
+          <section className="p-8 py-4 print:p-0 print:flex-[2]">
+            <h3 className="text-lg font-mono font-bold mb-3 border-b pb-1 dark:text-white print:mb-1">Educación</h3>
+            <div className="space-y-3 print:space-y-1">
+              <div>
+                <div className="flex justify-between items-baseline mb-0.5">
+                  <h4 className="text-sm font-semibold dark:text-white">Técnico Superior en Programación | UTN</h4>
+                  <span className="text-xs font-mono opacity-80">2015</span>
+                </div>
+                <p className="text-xs">Formación técnica en programación y desarrollo de software.</p>
+                <p className="text-xs font-medium">Tesis pendiente.</p>
               </div>
-              <p className="text-xs">Formación técnica en programación, desarrollo de software y soluciones tecnológicas.</p>
-              <p className="text-xs font-medium mt-0.5">Tesis pendiente.</p>
-            </div>
-            <div>
-              <div className="flex justify-between items-baseline mb-0.5">
-                <h4 className="text-sm font-semibold dark:text-white">Plan 111mil de Programación</h4>
-                <span className="text-xs font-mono opacity-80">2016</span>
+              <div>
+                <div className="flex justify-between items-baseline mb-0.5">
+                  <h4 className="text-sm font-semibold dark:text-white">Plan 111mil de Programación</h4>
+                  <span className="text-xs font-mono opacity-80">2016</span>
+                </div>
+                <p className="text-xs">Curso anual. Formación en POO, Java y SQL.</p>
               </div>
-              <p className="text-xs">Curso de programación de un año de duración.</p>
-              <p className="text-xs">Formación en POO, Java y SQL.</p>
-            </div>
-            <div>
-              <div className="flex justify-between items-baseline mb-0.5">
-                <h4 className="text-sm font-semibold dark:text-white">Técnico en Reparación de PC | Academia Santo Domingo</h4>
-                <span className="text-xs font-mono opacity-80">2012 – 2013</span>
+              <div>
+                <div className="flex justify-between items-baseline mb-0.5">
+                  <h4 className="text-sm font-semibold dark:text-white">Técnico en Reparación de PC | Academia Santo Domingo</h4>
+                  <span className="text-xs font-mono opacity-80">2012 – 2013</span>
+                </div>
+                <p className="text-xs">Reparación de computadoras y configuración de redes.</p>
               </div>
-              <p className="text-xs">Formación en reparación y mantenimiento de computadoras y configuración de redes.</p>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Idiomas */}
-        <section className="px-8 pb-8 pt-0 print:pt-2">
-          <h3 className="text-lg font-mono font-bold mb-2 border-b pb-1 dark:text-white print:mb-1">Idiomas</h3>
-          <div className="flex flex-col gap-1 text-xs">
-            <div><span className="font-semibold mr-2">Español:</span>Nativo</div>
-            <div><span className="font-semibold mr-2">Inglés:</span>Lectura técnica / Básico</div>
-          </div>
-        </section>
+          {/* Idiomas */}
+          <section className="px-8 pb-8 pt-0 print:p-0 print:flex-[1]">
+            <h3 className="text-lg font-mono font-bold mb-2 border-b pb-1 dark:text-white print:mb-1">Idiomas</h3>
+            <div className="flex flex-col gap-1 text-xs">
+              <div><span className="font-semibold mr-2">Español:</span>Nativo</div>
+              <div><span className="font-semibold mr-2">Inglés:</span>Lectura técnica / Básico</div>
+            </div>
+          </section>
+        </div>
       </div>
 
       <style jsx global>{`
         @media print {
-          @page { size: 210mm 450mm; margin: 0; }
+          @page { size: A4; margin: 8mm 10mm; }
           html, body, #__next, .cv-root {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
@@ -286,17 +289,22 @@ export default function Curriculum() {
           .dark & { background: #fff !important; }
           .dark .cv-root { background: #fff !important; }
           .dark .cv-root * { background-color: transparent !important; }
-          body, .cv-root { font-size: 9pt !important; line-height: 1.3; }
-          .cv-root .p-8 { padding: 12px 20px !important; }
-          .cv-root .py-4 { padding-top: 8px !important; padding-bottom: 8px !important; }
-          .cv-root h1 { font-size: 16pt !important; margin-bottom: 2px !important; }
-          .cv-root h2 { font-size: 10pt !important; margin-bottom: 2px !important; }
-          .cv-root h3 { font-size: 11pt !important; margin-bottom: 4px !important; border-bottom: 1px solid #ccc !important; padding-bottom: 2px !important; }
-          .cv-root h4 { font-size: 9.5pt !important; }
-          .cv-root p, .cv-root li, .cv-root span, .cv-root div { font-size: 8.5pt !important; }
-          .cv-root ul { margin-top: 2px !important; margin-bottom: 4px !important; }
-          .cv-root .mb-4 { margin-bottom: 8px !important; }
-          .cv-root .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 6px !important; }
+          body, .cv-root { font-size: 8pt !important; line-height: 1.25; }
+          .cv-root .max-w-4xl { max-width: 100% !important; padding-top: 0 !important; }
+          .cv-root section, .cv-root .p-8 { padding: 6px 0 !important; }
+          .cv-root .py-4 { padding-top: 4px !important; padding-bottom: 4px !important; }
+          .cv-root h1 { font-size: 15pt !important; margin-bottom: 1px !important; }
+          .cv-root h3 { font-size: 9.5pt !important; margin-bottom: 2px !important; border-bottom: 1px solid #ccc !important; padding-bottom: 1px !important; }
+          .cv-root h4 { font-size: 8.5pt !important; margin-bottom: 0 !important; }
+          .cv-root p, .cv-root li, .cv-root span:not(.font-semibold), .cv-root a { font-size: 7.5pt !important; }
+          .cv-root ul { margin-top: 1px !important; margin-bottom: 3px !important; padding-left: 14px !important; }
+          .cv-root li { margin-bottom: 1px !important; }
+          .cv-root .mb-4 { margin-bottom: 5px !important; }
+          .cv-root .mb-2 { margin-bottom: 3px !important; }
+          .cv-root .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 4px !important; }
+          .cv-root .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 2px !important; }
+          .cv-root .border-l-2 { padding-left: 6px !important; margin-bottom: 4px !important; }
+          .cv-root .space-y-3.projects > :not([hidden]) ~ :not([hidden]) { margin-top: 4px !important; }
           .print\:hidden, .cv-root button, .cv-root [role="button"] { display: none !important; }
           h1, h2, h3, h4, h5, h6, p, span, li, td, th, a, div { color: #000 !important; -webkit-text-fill-color: #000 !important; }
           * { box-shadow: none !important; text-shadow: none !important; }
