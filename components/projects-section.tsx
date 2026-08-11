@@ -217,18 +217,7 @@ export function ProjectsSection() {
               Nuevo Proyecto
             </Button>
           )}
-          <div className="mt-4 flex justify-center">
-            <Button 
-              variant="destructive" 
-              size="sm"
-              onClick={() => {
-                throw new Error("Sentry Test Error from Projects Section");
-              }}
-              className="z-10 relative shadow-sm"
-            >
-              Test Sentry Error
-            </Button>
-          </div>
+
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative max-w-6xl mx-auto">
