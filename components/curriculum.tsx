@@ -57,42 +57,41 @@ export default function Curriculum() {
 
       <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-none rounded-none overflow-visible pt-4">
         {/* Header */}
-        <div className="bg-white dark:bg-black text-black dark:text-white p-8 pb-4 print:p-4 print:pb-2">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center print:gap-4 print:flex-row">
+        <div className="bg-white dark:bg-black text-black dark:text-white p-8 pb-4 print:p-3 print:pb-2">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center print:gap-5 print:flex-row print:items-start">
             {/* Foto de perfil */}
-            <div className="flex-shrink-0 print:block">
+            <div className="flex-shrink-0 print:block print:mt-0">
               <img 
                 src="/profile-cv.jpg" 
                 alt="Mario Gabriel Avendaño" 
-                className="w-36 sm:w-40 md:w-44 print:w-20 print:border-2 h-auto rounded-xl object-contain border-4 border-muted shadow-sm"
+                className="w-36 sm:w-40 md:w-44 print:w-24 print:border-2 h-auto rounded-xl object-contain border-4 border-muted shadow-sm"
               />
             </div>
             
             {/* Información personal */}
-            <div className="flex flex-col gap-2 text-center md:text-left">
+            <div className="flex flex-col gap-2 text-center md:text-left w-full">
               <div>
-                <h1 className="text-3xl font-mono font-bold mb-2 dark:text-white print:mb-1">Mario Gabriel Avendaño</h1>
-                <h2 className="text-lg font-light opacity-90 dark:text-white print:text-xs print:opacity-100">Desarrollador Frontend Junior | React · Next.js · TypeScript</h2>
-                <h3 className="text-sm font-light opacity-80 dark:text-white print:text-[10px] print:opacity-100 mt-1">JavaScript · Node.js · PostgreSQL · APIs REST</h3>
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs print:mt-2 text-left">
+                <h1 className="text-3xl font-mono font-bold mb-1 dark:text-white print:mb-0.5 print:text-2xl">Mario Gabriel Avendaño</h1>
+                <p className="text-sm font-light opacity-80 dark:text-white print:text-[10px] print:opacity-100 print:mb-1">Desarrollador Frontend Junior | React · Next.js · TypeScript · Node.js · PostgreSQL</p>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs print:mt-1.5 print:gap-x-4 print:gap-y-0.5 text-left">
                   <div className="flex items-center gap-2">
-                    <Mail className="h-4 w-4 text-primary print:text-black" />
+                    <Mail className="h-4 w-4 text-primary print:text-black flex-shrink-0" />
                     <a href="mailto:mariogabrielydlp@gmail.com" className="hover:underline">mariogabrielydlp@gmail.com</a>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Phone className="h-4 w-4 text-primary print:text-black" />
+                    <Phone className="h-4 w-4 text-primary print:text-black flex-shrink-0" />
                     <a href="tel:+543516503188" className="hover:underline">+54 351 650 3188</a>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Github className="h-4 w-4 text-primary print:text-black" />
+                    <Github className="h-4 w-4 text-primary print:text-black flex-shrink-0" />
                     <a href="https://github.com/mgaDesarrollo" target="_blank" rel="noopener noreferrer" className="hover:underline">github.com/mgaDesarrollo</a>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Linkedin className="h-4 w-4 text-primary print:text-black" />
+                    <Linkedin className="h-4 w-4 text-primary print:text-black flex-shrink-0" />
                     <a href="https://linkedin.com/in/mario-gabriel-avendaño-4334aa025/" target="_blank" rel="noopener noreferrer" className="hover:underline">linkedin.com/in/mario-gabriel-avendaño-4334aa025/</a>
                   </div>
                   <div className="flex items-center gap-2 sm:col-span-2">
-                    <Globe className="h-4 w-4 text-primary print:text-black" />
+                    <Globe className="h-4 w-4 text-primary print:text-black flex-shrink-0" />
                     <a href="https://portfolio-react-onic-rho.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:underline">portfolio-react-onic-rho.vercel.app/</a>
                   </div>
                 </div>
