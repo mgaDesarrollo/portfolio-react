@@ -29,6 +29,7 @@ import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github, Plus, Edit, Trash2 } from "lucide-react"
 import { ProjectModal } from "./project-modal"
 import type { Project } from "./project-form"
+import { motion } from "framer-motion"
 
 export function ProjectsSection() {
   const [projects, setProjects] = useState<Project[]>([])
@@ -127,9 +128,15 @@ export function ProjectsSection() {
   }
 
   return (
-    <section id="proyectos" className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="proyectos" className="py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <div className="flex items-center justify-center gap-4 mb-4">
             {/* Título con efecto de iluminación */}
             <div className="relative">
@@ -170,12 +177,19 @@ export function ProjectsSection() {
               Nuevo Proyecto
             </Button>
           )}
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative max-w-6xl mx-auto">
-          {projects.map((project) => (
-            <div key={project.id} className="h-full">
-              <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 relative w-full h-[500px] flex flex-col">
+          {projects.map((project, index) => (
+            <motion.div 
+              key={project.id} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="h-full"
+            >
+              <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 relative w-full h-[500px] flex flex-col group transform hover:-translate-y-2 border-border/50 hover:border-primary/30">
                 {isAuthenticated && isAdminMode && (
                   <div className="absolute top-2 right-2 z-10 flex gap-2">
                     <Button
@@ -196,20 +210,21 @@ export function ProjectsSection() {
                     </Button>
                   </div>
                 )}
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden relative">
+                  <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                   <img
                     src={project.image || "/placeholder.svg?height=300&width=500&query=project screenshot"}
                     alt={project.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
-                <CardHeader className="flex-0">
-                  <CardTitle className="text-xl">{project.title}</CardTitle>
+                <CardHeader className="flex-0 relative z-20 bg-card">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">{project.title}</CardTitle>
                   <CardDescription className="text-pretty">
                     <ProjectDescription description={project.description} />
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="flex-1 flex flex-col justify-end">
+                <CardContent className="flex-1 flex flex-col justify-end relative z-20 bg-card">
                   <div className="flex flex-wrap gap-2 mb-4">
                     {(
                       typeof project.technologies === "string"
@@ -218,23 +233,23 @@ export function ProjectsSection() {
                           ? (project.technologies as string[])
                           : []
                     ).map((tech: string, techIndex: number) => (
-                      <Badge key={techIndex} variant="secondary" className="text-xs">
+                      <Badge key={techIndex} variant="secondary" className="text-xs transition-colors group-hover:bg-primary/10 group-hover:text-primary">
                         {tech}
                       </Badge>
                     ))}
                   </div>
                   <div className="flex gap-3">
                     {project.liveUrl && project.liveUrl !== "#" && (
-                      <Button size="sm" className="flex-1" asChild>
-                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" className="flex-1 group-hover:bg-primary" asChild>
+                        <a href={project.liveUrl.startsWith("http") ? project.liveUrl : `https://${project.liveUrl}`} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="mr-2 h-4 w-4" />
                           Ver Proyecto
                         </a>
                       </Button>
                     )}
                     {project.githubUrl && project.githubUrl !== "#" && (
-                      <Button variant="outline" size="sm" className="flex-1 bg-transparent" asChild>
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <Button variant="outline" size="sm" className="flex-1 bg-transparent group-hover:border-primary/50" asChild>
+                        <a href={project.githubUrl.startsWith("http") ? project.githubUrl : `https://${project.githubUrl}`} target="_blank" rel="noopener noreferrer">
                           <Github className="mr-2 h-4 w-4" />
                           Código
                         </a>
@@ -243,7 +258,7 @@ export function ProjectsSection() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

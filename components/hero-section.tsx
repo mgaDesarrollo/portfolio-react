@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Download, ArrowDown, ChevronRight, Circle } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
+import { motion } from "framer-motion"
 
 const TECH_PILLS = [
   "React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "Docker", "Prisma"
@@ -33,16 +34,25 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Left column — Text content (protagonist) */}
-          <div className="order-2 lg:order-1">
-
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="order-2 lg:order-1"
+          >
             {/* Availability badge */}
-            <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-sm font-medium">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-sm font-medium"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               Disponible para nuevas oportunidades
-            </div>
+            </motion.div>
 
             {/* Greeting + Role */}
             <p className="text-base font-medium text-slate-500 dark:text-slate-400 tracking-wide mb-2">
@@ -64,11 +74,16 @@ export function HeroSection() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-3 mb-8"
+            >
               <Button
                 asChild
                 size="lg"
-                className="font-semibold bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 group"
+                className="font-semibold bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 group transition-all duration-300 transform hover:scale-105"
               >
                 <a href="#proyectos">
                   Ver Proyectos
@@ -78,27 +93,32 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="font-medium border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="font-medium border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-300 transform hover:scale-105"
                 asChild
               >
                 <a href="/curriculum" target="_blank" rel="noopener noreferrer">
-                  <Download className="mr-2 h-4 w-4" /> Descargar CV
+                  <Download className="mr-2 h-4 w-4" /> Ver CV
                 </a>
               </Button>
               <Button
                 variant="ghost"
                 size="lg"
-                className="font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+                className="font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-300 transform hover:scale-105"
                 asChild
               >
                 <a href="mailto:mariogabriel.dvlp@gmail.com">
                   Contactarme
                 </a>
               </Button>
-            </div>
+            </motion.div>
 
             {/* Tech pills row */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-slate-500 dark:text-slate-400">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-slate-500 dark:text-slate-400"
+            >
               {TECH_PILLS.map((tech, i) => (
                 <span key={tech} className="flex items-center gap-3">
                   <span className="font-medium text-slate-700 dark:text-slate-300">{tech}</span>
@@ -107,15 +127,20 @@ export function HeroSection() {
                   )}
                 </span>
               ))}
-            </div>
+            </motion.div>
 
             {/* Social links */}
-            <div className="flex items-center gap-3 mt-8">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex items-center gap-3 mt-8"
+            >
               <a
                 href="https://github.com/mgaDesarrollo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-all duration-300 transform hover:-translate-y-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
                 aria-label="GitHub"
               >
                 <Github className="h-5 w-5" />
@@ -124,16 +149,21 @@ export function HeroSection() {
                 href="https://www.linkedin.com/in/mario-gabriel-avenda%C3%B1o-4334a02a5/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="p-2 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100 transition-all duration-300 transform hover:-translate-y-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          {/* Right column — Profile image (support role, smaller) */}
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+          {/* Right column — Profile image */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, type: "spring", stiffness: 100 }}
+            className="order-1 lg:order-2 flex justify-center lg:justify-end"
+          >
             <div className="relative group">
               {/* Glow */}
               <div
@@ -145,8 +175,8 @@ export function HeroSection() {
                 aria-hidden
                 className="absolute inset-0 border border-slate-300/60 dark:border-slate-700/60 rounded-[1.8rem] translate-x-3 translate-y-3 -z-10 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-300"
               />
-              {/* Image card — slightly smaller than before so text is protagonist */}
-              <div className="relative w-[220px] h-[275px] sm:w-[250px] sm:h-[312px] lg:w-[290px] lg:h-[362px] rounded-[1.8rem] overflow-hidden border-4 border-white dark:border-slate-950 bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-slate-950/80 transition-transform duration-300 group-hover:scale-[1.01]">
+              {/* Image card */}
+              <div className="relative w-[220px] h-[275px] sm:w-[250px] sm:h-[312px] lg:w-[290px] lg:h-[362px] rounded-[1.8rem] overflow-hidden border-4 border-white dark:border-slate-950 bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-slate-950/80 transition-transform duration-300 group-hover:scale-[1.03]">
                 {!imageLoaded && !imageError && (
                   <div className="absolute inset-0 animate-pulse bg-slate-200 dark:bg-slate-700" />
                 )}
@@ -174,14 +204,19 @@ export function HeroSection() {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-slate-400 dark:text-slate-600">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-slate-400 dark:text-slate-600"
+        >
           <span className="text-xs tracking-wider uppercase">Scroll</span>
           <ArrowDown className="h-4 w-4 animate-bounce" />
-        </div>
+        </motion.div>
       </div>
     </section>
   )

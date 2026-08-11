@@ -49,9 +49,9 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Descargar CV"
+            aria-label="Ver CV"
           >
-            <FileText className="h-4 w-4" /> Descargar CV
+            <FileText className="h-4 w-4" /> Ver CV
           </a>
         </div>
 

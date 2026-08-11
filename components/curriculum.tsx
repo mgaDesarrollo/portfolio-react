@@ -1,20 +1,14 @@
 "use client"
 
 import { Download, Mail, Phone, Github, Globe, Linkedin, ArrowLeft } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
 
 export default function Curriculum() {
   const router = useRouter()
   const { setTheme } = useTheme()
-
-  useEffect(() => {
-    setTheme("light")
-  }, [setTheme])
 
   // Forzar tema claro al imprimir (si está en modo oscuro lo quita temporalmente)
   useEffect(() => {
@@ -49,39 +43,41 @@ export default function Curriculum() {
     }, 30)
   }
 
-  const [cvImageSrc, setCvImageSrc] = useState("/profile.jpg")
-  const [imgError, setImgError] = useState(false)
-
   return (
-    <div className="min-h-screen bg-white dark:bg-black p-8 cv-root">
-      <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-none rounded-none overflow-visible">
+    <div className="min-h-screen bg-white dark:bg-black p-8 cv-root relative">
+      {/* Controles flotantes (ocultos en impresión) */}
+      <div className="fixed top-4 right-4 flex items-center gap-2 z-50 print:hidden">
+        <Button onClick={() => router.back()} variant="outline" size="icon" className="h-8 w-8 rounded-full shadow-md bg-white dark:bg-black" title="Volver">
+          <ArrowLeft className="w-4 h-4" />
+        </Button>
+        <Button onClick={handlePrint} variant="secondary" size="icon" className="h-8 w-8 rounded-full shadow-md" title="Descargar PDF">
+          <Download className="w-4 h-4" />
+        </Button>
+      </div>
+
+      <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-none rounded-none overflow-visible pt-4">
         {/* Header */}
-        <div className="bg-white dark:bg-black text-black dark:text-white p-8">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-6">
-            {/* Bloque Izquierdo con Avatar + Datos */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-              <div className="relative mx-auto sm:mx-0 h-44 w-44 print:h-36 print:w-36 overflow-hidden rounded-none">
-                <Image
-                  src="/profile-cv.jpg"
-                  alt="Foto de perfil de Mario Gabriel Avendaño"
-                  fill
-                  priority
-                  unoptimized
-                  className="object-cover"
-                  style={{
-                    objectPosition: '50% 20%',
-                    transform: 'scale(1.15)',
-                    transformOrigin: '50% 20%'
-                  }}
-                />
-              </div>
+        <div className="bg-white dark:bg-black text-black dark:text-white p-8 pb-4">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
+            {/* Foto de perfil */}
+            <div className="flex-shrink-0 print:block">
+              <img 
+                src="/profile-cv.jpg" 
+                alt="Mario Gabriel Avendaño" 
+                className="w-36 sm:w-40 md:w-44 h-auto rounded-xl object-contain border-4 border-muted shadow-sm"
+              />
+            </div>
+            
+            {/* Información personal */}
+            <div className="flex flex-col gap-2 text-center md:text-left">
               <div>
                 <h1 className="text-3xl font-mono font-bold mb-2 dark:text-white print:mb-1">Mario Gabriel Avendaño</h1>
-                <h2 className="text-lg font-light opacity-90 dark:text-white print:text-xs print:opacity-100">Desarrollador Full Stack Junior | React · Next.js · Node.js · PostgreSQL</h2>
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs print:mt-2">
+                <h2 className="text-lg font-light opacity-90 dark:text-white print:text-xs print:opacity-100">Desarrollador Frontend Junior | React · Next.js · TypeScript</h2>
+                <h3 className="text-sm font-light opacity-80 dark:text-white print:text-[10px] print:opacity-100 mt-1">JavaScript · Node.js · PostgreSQL · APIs REST</h3>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs print:mt-2 text-left">
                   <div className="flex items-center gap-2">
                     <Mail className="h-4 w-4 text-primary print:text-black" />
-                    <a href="mailto:mariogabriel.dvlp@gmail.com" className="hover:underline">mariogabriel.dvlp@gmail.com</a>
+                    <a href="mailto:mariogabrielydlp@gmail.com" className="hover:underline">mariogabrielydlp@gmail.com</a>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="h-4 w-4 text-primary print:text-black" />
@@ -93,187 +89,217 @@ export default function Curriculum() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Linkedin className="h-4 w-4 text-primary print:text-black" />
-                    <a href="https://www.linkedin.com/in/mario-gabriel-avenda%C3%B1o-4334a02a5/" target="_blank" rel="noopener noreferrer" className="hover:underline">https://www.linkedin.com/in/mario-gabriel-avendaño-4334a02a5/</a>
+                    <a href="https://linkedin.com/in/mario-gabriel-avendaño-4334aa025/" target="_blank" rel="noopener noreferrer" className="hover:underline">linkedin.com/in/mario-gabriel-avendaño-4334aa025/</a>
                   </div>
                   <div className="flex items-center gap-2 sm:col-span-2">
                     <Globe className="h-4 w-4 text-primary print:text-black" />
-                    <a href="https://portfolio-react-orcin-rho.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:underline">https://portfolio-react-orcin-rho.vercel.app/</a>
+                    <a href="https://portfolio-react-onic-rho.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:underline">portfolio-react-onic-rho.vercel.app/</a>
                   </div>
                 </div>
               </div>
             </div>
-            {/* Controles (ocultos en impresión) */}
-            <div className="flex items-center gap-2 self-start print:hidden">
-              <Button onClick={() => router.back()} variant="outline" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-1" /> Volver
-              </Button>
-              <Button onClick={handlePrint} variant="secondary" size="sm">
-                <Download className="w-4 h-4 mr-2" /> PDF
-              </Button>
-            </div>
           </div>
         </div>
+
         {/* Perfil Profesional */}
-        <section className="p-8">
-          <h3 className="text-xl font-mono font-bold mb-3 border-b pb-1 dark:text-white">Perfil Profesional</h3>
-          <p className="text-sm leading-relaxed dark:text-white">
-            Desarrollador Frontend orientado a React y Next.js, con experiencia en desarrollo de aplicaciones web y proyectos freelance. Trabajo con JavaScript/TypeScript, React, Next.js, Node.js y PostgreSQL, integrando APIs y bases de datos.
-          </p>
-          <p className="text-sm leading-relaxed dark:text-white mt-3">
-            Experiencia trabajando de forma independiente en proyectos completos, desde el desarrollo de interfaces y funcionalidades hasta la integración con backend y despliegue. Actualmente enfocado en incorporarme a un equipo de desarrollo donde pueda aportar y seguir creciendo profesionalmente.
-          </p>
+        <section className="p-8 py-4">
+          <h3 className="text-lg font-mono font-bold mb-2 border-b pb-1 dark:text-white">Perfil Profesional</h3>
+          <div className="space-y-2 text-sm leading-relaxed dark:text-white print:text-xs">
+            <p>
+              Desarrollador Frontend Junior especializado en React y Next.js, con experiencia práctica en el desarrollo de aplicaciones web y proyectos freelance. Trabajo con JavaScript, TypeScript, React, Next.js, Node.js y PostgreSQL, desarrollando interfaces responsive, integrando APIs y conectando aplicaciones con bases de datos.
+            </p>
+            <p>
+              Actualmente participo en el desarrollo de una aplicación web de gobernanza digital, trabajando con Next.js, React, PostgreSQL, Prisma y Git.
+            </p>
+            <p>
+              Cuento además con experiencia previa en soporte técnico y atención a usuarios, lo que me permite combinar conocimientos técnicos con capacidad de resolución de problemas, comunicación y trabajo en equipo.
+            </p>
+            <p>
+              Busco incorporarme a un equipo de desarrollo donde pueda aportar experiencia práctica, continuar creciendo profesionalmente y asumir nuevos desafíos técnicos.
+            </p>
+          </div>
         </section>
+
         {/* Experiencia Laboral */}
-        <section className="p-8">
-          <h3 className="text-xl font-mono font-bold mb-3 border-b pb-1 dark:text-white">Experiencia Laboral</h3>
-          <div className="mb-5">
-            <h4 className="text-base font-semibold dark:text-white">Desarrollador de Software | SingularityNET</h4>
-            <span className="text-xs opacity-80">mayo de 2025 - actualidad</span>
-            <ul className="list-disc ml-6 mt-1.5 text-xs dark:text-white">
-              <li>Desarrollo de funcionalidades para una aplicación de consenso y gobernanza digital sobre el ecosistema descentralizado de SingularityNET.</li>
-              <li>Implementación de interfaces de usuario interactivas y dinámicas utilizando Next.js y React.</li>
-              <li>Integración de servicios y APIs para gestionar la lógica de consenso y toma de decisiones de la comunidad.</li>
-              <li>Colaboración en la integración de soluciones basadas en Inteligencia Artificial y tecnologías descentralizadas.</li>
-              <li>Trabajo colaborativo con control de versiones mediante Git y GitHub.</li>
+        <section className="p-8 py-4">
+          <h3 className="text-lg font-mono font-bold mb-3 border-b pb-1 dark:text-white">Experiencia Laboral</h3>
+          
+          <div className="mb-4">
+            <div className="flex justify-between items-baseline mb-1">
+              <h4 className="text-sm font-semibold dark:text-white">Desarrollador de Software | SingularityNET</h4>
+              <span className="text-xs font-mono opacity-80">Mayo 2025 – Abril 2026</span>
+            </div>
+            <ul className="list-disc ml-5 space-y-0.5 text-xs dark:text-white">
+              <li>Desarrollo de funcionalidades para una aplicación web de gobernanza digital utilizando React y Next.js.</li>
+              <li>Implementación de interfaces interactivas y componentes reutilizables.</li>
+              <li>Desarrollo de funcionalidades utilizando JavaScript/TypeScript, React y Next.js.</li>
+              <li>Integración de APIs y servicios para la gestión de datos y funcionalidades de la aplicación.</li>
+              <li>Trabajo con PostgreSQL y Prisma para persistencia y acceso a datos.</li>
+              <li>Implementación y mantenimiento de funcionalidades de autenticación y control de acceso.</li>
+              <li>Participación en la integración de soluciones basadas en tecnologías descentralizadas.</li>
+              <li>Trabajo colaborativo y control de versiones utilizando Git y GitHub.</li>
             </ul>
           </div>
-          <div className="mb-5">
-            <h4 className="text-base font-semibold dark:text-white">Desarrollador Frontend Freelance</h4>
-            <span className="text-xs opacity-80">enero de 2025 - actualidad</span>
-            <ul className="list-disc ml-6 mt-1.5 text-xs dark:text-white">
-              <li>Desarrollo de aplicaciones web utilizando React, Next.js y JavaScript/TypeScript.</li>
-              <li>Implementación de interfaces responsive y componentes reutilizables con Tailwind CSS.</li>
-              <li>Integración de APIs y servicios backend para el flujo de datos.</li>
-              <li>Desarrollo de funcionalidades completas desde el diseño hasta el deployment.</li>
-              <li>Optimización de rendimiento, UX y adaptación responsive.</li>
-              <li>Gestión de código y versiones utilizando Git y GitHub.</li>
-              <li>Algunos proyectos desarrollados se encuentran disponibles en mi portfolio.</li>
+
+          <div className="mb-4">
+            <div className="flex justify-between items-baseline mb-1">
+              <h4 className="text-sm font-semibold dark:text-white">Desarrollador Frontend Freelance</h4>
+              <span className="text-xs font-mono opacity-80">Enero 2025 – Actualidad</span>
+            </div>
+            <ul className="list-disc ml-5 space-y-0.5 text-xs dark:text-white">
+              <li>Desarrollo de aplicaciones web utilizando React, Next.js, JavaScript y TypeScript.</li>
+              <li>Creación de interfaces responsive y componentes reutilizables con Tailwind CSS.</li>
+              <li>Integración de APIs y servicios backend.</li>
+              <li>Desarrollo de funcionalidades completas desde la implementación hasta el deployment.</li>
+              <li>Desarrollo de aplicaciones CRUD y sistemas de gestión orientados a necesidades específicas de clientes.</li>
+              <li>Optimización de interfaces, experiencia de usuario y adaptación a dispositivos móviles.</li>
+              <li>Gestión de código y versiones mediante Git y GitHub.</li>
+              <li>Desarrollo de proyectos disponibles en mi portfolio.</li>
             </ul>
           </div>
-          <div className="mb-5">
-            <h4 className="text-base font-semibold dark:text-white">Técnico de Soporte a Usuarios | Flexxus</h4>
-            <span className="text-xs opacity-80">agosto de 2020 - noviembre de 2020</span>
-            <ul className="list-disc ml-6 mt-1.5 text-xs dark:text-white">
-              <li>Ofrecí soporte técnico integral a clientes del sistema ERP Flexxus, resolviendo incidencias de forma remota y telefónica.</li>
-              <li>Gestioné la configuración e instalación de software, incluyendo puestos de trabajo y impresoras fiscales.</li>
-              <li>Realicé el mantenimiento y la migración de bases de datos de clientes para asegurar la integridad y el rendimiento del sistema.</li>
-              <li>Coordiné las actualizaciones de software, minimizando el impacto en las operaciones de los clientes.</li>
+
+          <div className="mb-4">
+            <div className="flex justify-between items-baseline mb-1">
+              <h4 className="text-sm font-semibold dark:text-white">Técnico de Soporte a Usuarios | Flexxus</h4>
+              <span className="text-xs font-mono opacity-80">Agosto 2020 – Noviembre 2020</span>
+            </div>
+            <ul className="list-disc ml-5 space-y-0.5 text-xs dark:text-white">
+              <li>Soporte técnico a usuarios del sistema ERP Flexxus.</li>
+              <li>Resolución de incidencias de manera remota y telefónica.</li>
+              <li>Configuración e instalación de software, puestos de trabajo e impresoras fiscales.</li>
+              <li>Mantenimiento y actualización de bases de datos de clientes.</li>
+              <li>Análisis y resolución de problemas relacionados con las operaciones del sistema.</li>
+              <li>Coordinación de actualizaciones de software minimizando el impacto en las operaciones de los clientes.</li>
             </ul>
           </div>
-          <div className="mb-5">
-            <h4 className="text-base font-semibold dark:text-white">Soporte Técnico a Clientes | Telmex</h4>
-            <span className="text-xs opacity-80">enero de 2011 - enero de 2012</span>
-            <ul className="list-disc ml-6 mt-1.5 text-xs dark:text-white">
-              <li>Proporcioné asistencia técnica especializada a clientes de servicios de banda ancha, resolviendo problemas de conectividad y configuración.</li>
-              <li>Aseguré una alta satisfacción del cliente a través de una comunicación clara y la resolución eficaz de problemas.</li>
+
+          <div className="mb-2">
+            <div className="flex justify-between items-baseline mb-1">
+              <h4 className="text-sm font-semibold dark:text-white">Soporte Técnico a Clientes | Telmex</h4>
+              <span className="text-xs font-mono opacity-80">Enero 2011 – Enero 2012</span>
+            </div>
+            <ul className="list-disc ml-5 space-y-0.5 text-xs dark:text-white">
+              <li>Asistencia técnica a clientes de servicios de banda ancha.</li>
+              <li>Diagnóstico y resolución de problemas de conectividad y configuración.</li>
+              <li>Atención de consultas y resolución de incidencias técnicas.</li>
+              <li>Comunicación directa con clientes para identificar problemas y brindar soluciones.</li>
             </ul>
           </div>
         </section>
-        {/* Educación */}
-        <section className="p-8">
-          <h3 className="text-xl font-mono font-bold mb-3 border-b pb-1 dark:text-white">Educación</h3>
+
+        {/* Proyectos Destacados */}
+        <section className="p-8 py-4">
+          <h3 className="text-lg font-mono font-bold mb-3 border-b pb-1 dark:text-white">Proyectos Destacados</h3>
           <div className="space-y-3">
-            <div className="border-l-4 pl-6">
-              <div className="flex justify-between items-start mb-1.5">
-                <h4 className="text-base font-semibold dark:text-white">Técnico Superior en Programación | UTN</h4>
-                <span className="text-xs">2015 · (falta solo tesis)</span>
-              </div>
-              <p className="text-xs font-medium">Programación informática, enfoque en desarrollo de software y soluciones técnicas.</p>
+            <div className="border-l-2 pl-3 border-gray-300 dark:border-gray-700">
+              <h4 className="text-sm font-semibold dark:text-white">Governance Dashboard</h4>
+              <span className="text-xs font-mono opacity-70 block mb-1">Next.js · React · TypeScript · PostgreSQL · Prisma</span>
+              <p className="text-xs dark:text-white">Aplicación web orientada a la gobernanza digital, con funcionalidades de autenticación, gestión de propuestas, votaciones, roles y panel administrativo.</p>
             </div>
-            <div className="border-l-4 pl-6">
-              <div className="flex justify-between items-start mb-1.5">
-                <h4 className="text-base font-semibold dark:text-white">Plan 111mil de programación</h4>
-                <span className="text-xs">2016</span>
-              </div>
-              <p className="text-xs font-medium">Curso de programación del gobierno, 1 año de duración. POO, Java, SQL.</p>
+            <div className="border-l-2 pl-3 border-gray-300 dark:border-gray-700">
+              <h4 className="text-sm font-semibold dark:text-white">Media Loca</h4>
+              <span className="text-xs font-mono opacity-70 block mb-1">Next.js · React · TypeScript · PostgreSQL · Prisma</span>
+              <p className="text-xs dark:text-white">Plataforma E-commerce & Sistema de Gestión. Aplicación web integral para una marca de diseño, incluye catálogo interactivo y un dashboard de administración para gestionar inventario, ventas, categorías y métricas con foco en el rendimiento y escalabilidad.</p>
             </div>
-            <div className="border-l-4 pl-6">
-              <div className="flex justify-between items-start mb-1.5">
-                <h4 className="text-base font-semibold dark:text-white">Técnico en reparación de PC | Academia Santo Domingo</h4>
-                <span className="text-xs">2012 - 2013</span>
-              </div>
-              <p className="text-xs font-medium">Curso de reparación de PC y configuración de redes.</p>
+            <div className="border-l-2 pl-3 border-gray-300 dark:border-gray-700">
+              <h4 className="text-sm font-semibold dark:text-white">Envios App</h4>
+              <span className="text-xs font-mono opacity-70 block mb-1">React · Node.js · PostgreSQL</span>
+              <p className="text-xs dark:text-white">Plataforma de gestión logística diseñada para el control y seguimiento de envíos. Permite la administración eficiente de paquetes, rutas y estados de entrega para optimizar el flujo de trabajo.</p>
             </div>
           </div>
         </section>
+
         {/* Habilidades Técnicas */}
-        <section className="p-8">
-          <h3 className="text-xl font-mono font-bold mb-3 border-b pb-1 dark:text-white">Habilidades Técnicas</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <section className="p-8 py-4">
+          <h3 className="text-lg font-mono font-bold mb-2 border-b pb-1 dark:text-white">Habilidades Técnicas</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-4">
             <div>
-              <h4 className="text-sm font-semibold mb-2">Frontend</h4>
-              <div className="flex flex-wrap gap-1.5">
-                {['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3'].map(skill => (
-                  <span key={skill} className="px-2.5 py-0.5 bg-gray-200 dark:bg-gray-800 rounded-full text-xs font-mono dark:text-white">{skill}</span>
-                ))}
-              </div>
+              <span className="text-xs font-semibold mr-2">Frontend:</span>
+              <span className="text-xs">React, Next.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Bootstrap</span>
             </div>
             <div>
-              <h4 className="text-sm font-semibold mb-2">Backend</h4>
-              <div className="flex flex-wrap gap-1.5">
-                {['Node.js', 'Java', 'PostgreSQL', 'Express.js', 'Prisma'].map(skill => (
-                  <span key={skill} className="px-2.5 py-0.5 bg-gray-200 dark:bg-gray-800 rounded-full text-xs font-mono dark:text-white">{skill}</span>
-                ))}
-              </div>
+              <span className="text-xs font-semibold mr-2">Backend:</span>
+              <span className="text-xs">Node.js, Express.js, REST APIs</span>
             </div>
             <div>
-              <h4 className="text-sm font-semibold mb-2">Metodologías</h4>
-              <div className="flex flex-wrap gap-1.5">
-                {['Scrum', 'Agile', 'Git Flow'].map(skill => (
-                  <span key={skill} className="px-2.5 py-0.5 bg-gray-200 dark:bg-gray-800 rounded-full text-xs font-mono dark:text-white">{skill}</span>
-                ))}
-              </div>
+              <span className="text-xs font-semibold mr-2">Bases de datos:</span>
+              <span className="text-xs">PostgreSQL, Prisma, MySQL, MongoDB, Firebird SQL</span>
             </div>
             <div>
-              <h4 className="text-sm font-semibold mb-2">Herramientas</h4>
-              <div className="flex flex-wrap gap-1.5">
-                {['Git', 'GitHub', 'VS Code'].map(skill => (
-                  <span key={skill} className="px-2.5 py-0.5 bg-gray-200 dark:bg-gray-800 rounded-full text-xs font-mono dark:text-white">{skill}</span>
-                ))}
-              </div>
+              <span className="text-xs font-semibold mr-2">Herramientas:</span>
+              <span className="text-xs">Git, GitHub, VS Code, Vite</span>
+            </div>
+            <div className="md:col-span-2">
+              <span className="text-xs font-semibold mr-2">Conceptos:</span>
+              <span className="text-xs">Responsive Design, Componentes reutilizables, CRUD, Integración de APIs, Autenticación, Control de versiones</span>
             </div>
           </div>
         </section>
-        {/* Idiomas (compacto) */}
-        <section className="px-8 pb-4 pt-0 print:pt-0">
-          <div className="flex flex-wrap items-center gap-2 text-xs">
-            <h3 className="text-sm font-mono font-semibold m-0 dark:text-white border-none p-0">Idiomas:</h3>
-            <span className="dark:text-white">Español (Nativo)</span>
-            <span className="opacity-60">|</span>
-            <span className="dark:text-white">Inglés (Básico)</span>
+
+        {/* Educación */}
+        <section className="p-8 py-4">
+          <h3 className="text-lg font-mono font-bold mb-3 border-b pb-1 dark:text-white">Educación</h3>
+          <div className="space-y-3">
+            <div>
+              <div className="flex justify-between items-baseline mb-0.5">
+                <h4 className="text-sm font-semibold dark:text-white">Técnico Superior en Programación | UTN</h4>
+                <span className="text-xs font-mono opacity-80">2015</span>
+              </div>
+              <p className="text-xs">Formación técnica en programación, desarrollo de software y soluciones tecnológicas.</p>
+              <p className="text-xs font-medium mt-0.5">Tesis pendiente.</p>
+            </div>
+            <div>
+              <div className="flex justify-between items-baseline mb-0.5">
+                <h4 className="text-sm font-semibold dark:text-white">Plan 111mil de Programación</h4>
+                <span className="text-xs font-mono opacity-80">2016</span>
+              </div>
+              <p className="text-xs">Curso de programación de un año de duración.</p>
+              <p className="text-xs">Formación en POO, Java y SQL.</p>
+            </div>
+            <div>
+              <div className="flex justify-between items-baseline mb-0.5">
+                <h4 className="text-sm font-semibold dark:text-white">Técnico en Reparación de PC | Academia Santo Domingo</h4>
+                <span className="text-xs font-mono opacity-80">2012 – 2013</span>
+              </div>
+              <p className="text-xs">Formación en reparación y mantenimiento de computadoras y configuración de redes.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Idiomas */}
+        <section className="px-8 pb-8 pt-0 print:pt-2">
+          <h3 className="text-lg font-mono font-bold mb-2 border-b pb-1 dark:text-white print:mb-1">Idiomas</h3>
+          <div className="flex flex-col gap-1 text-xs">
+            <div><span className="font-semibold mr-2">Español:</span>Nativo</div>
+            <div><span className="font-semibold mr-2">Inglés:</span>Lectura técnica / Básico</div>
           </div>
         </section>
       </div>
+
       <style jsx global>{`
         @media print {
-          @page { size: A4 portrait; margin: 10mm; }
+          @page { size: 210mm 450mm; margin: 0; }
           html, body, #__next, .cv-root {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
             background: #fff !important;
           }
-          /* Neutralizar posibles fondos oscuros heredados */
           .dark & { background: #fff !important; }
           .dark .cv-root { background: #fff !important; }
           .dark .cv-root * { background-color: transparent !important; }
-          body, .cv-root { font-size: 10px !important; line-height: 1.25; }
-          .cv-root .p-8 { padding: 18px !important; }
-          section.p-8 { padding: 14px 18px !important; }
-          .cv-root h1 { font-size: 18pt !important; margin-bottom: 4px !important; }
-          .cv-root h2 { font-size: 10pt !important; margin-bottom: 6px !important; }
-          .cv-root h3 { font-size: 10pt !important; margin-bottom: 6px !important; }
-          .cv-root h4 { font-size: 9pt !important; margin-bottom: 2px !important; }
-          .cv-root p, .cv-root li, .cv-root span { font-size: 8.5pt !important; }
-          .cv-root ul { margin: 2px 0 6px 0 !important; }
-          .cv-root .mb-5 { margin-bottom: 10px !important; }
-          .cv-root .mt-1.5 { margin-top: 4px !important; }
-          .cv-root .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 10px !important; }
-          /* Badges más compactas */
-          .cv-root span.rounded-full { padding: 2px 6px !important; font-size: 8pt !important; }
-          /* Ocultar controles no necesarios */
+          body, .cv-root { font-size: 9pt !important; line-height: 1.3; }
+          .cv-root .p-8 { padding: 12px 20px !important; }
+          .cv-root .py-4 { padding-top: 8px !important; padding-bottom: 8px !important; }
+          .cv-root h1 { font-size: 16pt !important; margin-bottom: 2px !important; }
+          .cv-root h2 { font-size: 10pt !important; margin-bottom: 2px !important; }
+          .cv-root h3 { font-size: 11pt !important; margin-bottom: 4px !important; border-bottom: 1px solid #ccc !important; padding-bottom: 2px !important; }
+          .cv-root h4 { font-size: 9.5pt !important; }
+          .cv-root p, .cv-root li, .cv-root span, .cv-root div { font-size: 8.5pt !important; }
+          .cv-root ul { margin-top: 2px !important; margin-bottom: 4px !important; }
+          .cv-root .mb-4 { margin-bottom: 8px !important; }
+          .cv-root .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 6px !important; }
           .print\:hidden, .cv-root button, .cv-root [role="button"] { display: none !important; }
-          /* Forzar texto negro */
-          h1, h2, h3, h4, h5, h6, p, span, li, td, th, a { color: #000 !important; -webkit-text-fill-color: #000 !important; }
+          h1, h2, h3, h4, h5, h6, p, span, li, td, th, a, div { color: #000 !important; -webkit-text-fill-color: #000 !important; }
           * { box-shadow: none !important; text-shadow: none !important; }
         }
       `}</style>

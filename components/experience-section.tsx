@@ -1,50 +1,85 @@
+"use client"
+
 import { Badge } from "@/components/ui/badge"
+import { motion } from "framer-motion"
 
 const EXPERIENCES = [
   {
-    role: "Desarrollador Full Stack Freelance",
-    company: "Proyectos independientes",
-    period: "2023 – Actualidad",
-    location: "Córdoba, Argentina · Remoto",
-    description:
-      "Desarrollo completo de aplicaciones web para clientes y proyectos propios. Desde el diseño de la arquitectura hasta el deploy en producción.",
+    role: "Desarrollador de Software",
+    company: "SingularityNET",
+    period: "Mayo 2025 – Abril 2026",
+    location: "Remoto",
+    description: "Desarrollo de funcionalidades para una aplicación web de gobernanza digital sobre el ecosistema descentralizado de SingularityNET.",
     achievements: [
-      "Desarrollo de dashboards administrativos con React y Next.js",
-      "APIs REST con Node.js, Express y PostgreSQL",
-      "Sistemas de gestión con autenticación JWT",
-      "Deploy en Vercel, VPS y contenedores Docker",
-      "Aplicaciones responsive con Tailwind CSS",
-      "Integración con bases de datos relacionales y NoSQL",
+      "Implementación de interfaces interactivas y componentes reutilizables.",
+      "Desarrollo de funcionalidades utilizando JavaScript/TypeScript, React y Next.js.",
+      "Integración de APIs y servicios para la gestión de datos.",
+      "Trabajo con PostgreSQL y Prisma para persistencia.",
+      "Mantenimiento de funcionalidades de autenticación y control de acceso.",
+      "Participación en la integración de soluciones descentralizadas.",
     ],
-    tags: ["React", "Next.js", "Node.js", "PostgreSQL", "Docker", "JWT", "TypeScript"],
+    tags: ["React", "Next.js", "TypeScript", "PostgreSQL", "Prisma", "Git"],
   },
   {
-    role: "Desarrollador Frontend",
-    company: "Proyectos académicos y personales",
-    period: "2021 – 2023",
-    location: "Córdoba, Argentina",
-    description:
-      "Formación autodidacta e intensiva en tecnologías modernas de desarrollo web. Construcción de proyectos progresivamente más complejos.",
+    role: "Desarrollador Frontend Freelance",
+    company: "Proyectos independientes",
+    period: "Enero 2025 – Actualidad",
+    location: "Remoto",
+    description: "Desarrollo completo de aplicaciones web para clientes y proyectos propios. Desde el diseño de la arquitectura hasta el deploy en producción.",
     achievements: [
-      "Aprendizaje de React y el ecosistema moderno de JavaScript",
-      "Construcción de SPAs y aplicaciones con estado complejo",
-      "Primeros proyectos con backend en Node.js",
-      "Trabajo con bases de datos SQL y diseño de esquemas",
+      "Desarrollo de aplicaciones web con React, Next.js y TypeScript.",
+      "Creación de interfaces responsive con Tailwind CSS.",
+      "Integración de APIs y servicios backend.",
+      "Desarrollo de aplicaciones CRUD y sistemas de gestión.",
+      "Optimización de interfaces y experiencia de usuario.",
     ],
-    tags: ["React", "JavaScript", "Node.js", "SQL", "HTML/CSS"],
+    tags: ["React", "Next.js", "TypeScript", "Tailwind CSS", "APIs REST"],
   },
+  {
+    role: "Técnico de Soporte a Usuarios",
+    company: "Flexxus",
+    period: "Agosto 2020 – Noviembre 2020",
+    location: "Córdoba, Argentina",
+    description: "Soporte técnico integral a clientes del sistema ERP Flexxus.",
+    achievements: [
+      "Resolución de incidencias de manera remota y telefónica.",
+      "Configuración e instalación de software e impresoras fiscales.",
+      "Mantenimiento y actualización de bases de datos de clientes.",
+      "Coordinación de actualizaciones de software.",
+    ],
+    tags: ["Soporte Técnico", "ERP", "Base de Datos", "Resolución de problemas"],
+  },
+  {
+    role: "Soporte Técnico a Clientes",
+    company: "Telmex",
+    period: "Enero 2011 – Enero 2012",
+    location: "Córdoba, Argentina",
+    description: "Asistencia técnica especializada a clientes de servicios de banda ancha.",
+    achievements: [
+      "Diagnóstico y resolución de problemas de conectividad.",
+      "Atención de consultas y resolución de incidencias técnicas.",
+      "Comunicación directa con clientes para brindar soluciones.",
+    ],
+    tags: ["Soporte Técnico", "Conectividad", "Atención al Cliente"],
+  }
 ]
 
 export function ExperienceSection() {
   return (
-    <section id="experiencia" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+    <section id="experiencia" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 overflow-hidden">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-14">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-14"
+        >
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Experiencia</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Trayectoria en desarrollo web, de proyectos personales a soluciones para clientes reales.
+            Trayectoria profesional combinando habilidades técnicas de desarrollo y resolución de problemas.
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline */}
         <div className="relative">
@@ -53,9 +88,23 @@ export function ExperienceSection() {
 
           <div className="space-y-10">
             {EXPERIENCES.map((exp, i) => (
-              <div key={i} className="relative flex flex-col md:flex-row gap-6 md:gap-10">
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+                className="relative flex flex-col md:flex-row gap-6 md:gap-10 group"
+              >
                 {/* Dot */}
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-2 border-background mt-2" aria-hidden />
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.4, delay: (i * 0.15) + 0.3 }}
+                  className="absolute left-4 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-2 border-background mt-2 shadow-[0_0_10px_rgba(var(--primary),0.5)] group-hover:scale-125 transition-transform" 
+                  aria-hidden 
+                />
 
                 {/* Left — period (desktop only) */}
                 <div className="hidden md:flex md:w-1/2 md:justify-end md:pr-10 pt-1">
@@ -70,7 +119,7 @@ export function ExperienceSection() {
                   {/* Mobile period */}
                   <p className="text-xs text-muted-foreground mb-1 md:hidden">{exp.period} · {exp.location}</p>
 
-                  <div className="rounded-xl border bg-card p-5 hover:shadow-md transition-shadow duration-300">
+                  <div className="rounded-xl border bg-card p-5 hover:shadow-lg hover:border-primary/20 transition-all duration-300 transform group-hover:-translate-y-1">
                     <h3 className="font-bold text-base text-foreground">{exp.role}</h3>
                     <p className="text-sm font-medium text-muted-foreground mb-3">{exp.company}</p>
                     <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{exp.description}</p>
@@ -91,7 +140,7 @@ export function ExperienceSection() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
