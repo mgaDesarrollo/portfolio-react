@@ -72,7 +72,7 @@ export default function Curriculum() {
             <div className="flex flex-col gap-2 text-center md:text-left w-full">
               <div>
                 <h1 className="text-3xl font-mono font-bold mb-1 dark:text-white print:mb-0.5 print:text-2xl">Mario Gabriel Avendaño</h1>
-                <p className="text-sm font-light opacity-80 dark:text-white print:text-[10px] print:opacity-100 print:mb-1">Desarrollador Frontend Junior | React · Next.js · TypeScript · Node.js · PostgreSQL</p>
+                <p className="text-sm font-light opacity-80 dark:text-white print:text-[10px] print:opacity-100 print:mb-1">Desarrollador Full Stack Junior | React · Next.js · TypeScript · Node.js · PostgreSQL</p>
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs print:mt-1.5 print:gap-x-4 print:gap-y-0.5 text-left">
                   <div className="flex items-center gap-2">
                     <Mail className="h-4 w-4 text-primary print:text-black flex-shrink-0" />
@@ -142,7 +142,7 @@ export default function Curriculum() {
 
           <div className="mb-4">
             <div className="flex justify-between items-baseline mb-1">
-              <h4 className="text-sm font-semibold dark:text-white">Desarrollador Frontend Freelance</h4>
+              <h4 className="text-sm font-semibold dark:text-white">Desarrollador Full Stack Freelance</h4>
               <span className="text-xs font-mono opacity-80">Enero 2025 – Actualidad</span>
             </div>
             <ul className="list-disc ml-5 space-y-0.5 text-xs dark:text-white">

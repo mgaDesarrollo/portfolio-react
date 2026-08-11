@@ -95,7 +95,7 @@ export function TechStackSection() {
           <h3 className="text-xl font-bold text-center mb-6">¿Qué puedo aportar a tu equipo?</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto">
             {[
-              "Desarrollo Frontend con React y Next.js",
+              "Desarrollo Web con React y Next.js",
               "Backend e integración de APIs REST",
               "Responsive Design y Componentes reutilizables",
               "Desarrollo de aplicaciones CRUD",

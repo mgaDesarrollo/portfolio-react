@@ -21,7 +21,7 @@ const EXPERIENCES = [
     tags: ["React", "Next.js", "TypeScript", "PostgreSQL", "Prisma", "Git"],
   },
   {
-    role: "Desarrollador Frontend Freelance",
+    role: "Desarrollador Full Stack Freelance",
     company: "Proyectos independientes",
     period: "Enero 2025 – Actualidad",
     location: "Remoto",
